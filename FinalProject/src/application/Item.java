@@ -9,7 +9,7 @@
  * 
  */
 
-package application.Item;
+package application;
 
 public class Item {
 

@@ -9,12 +9,12 @@
  * 
  */
 
-package application.Item;
+package application;
 
-public class Flashlight {
-	
-	public Flashlight() {
+public class Pipe extends Item{
+
+	public Pipe() {
 		
 	}//end of no-arg constructor
 	
-}//end of Flashlight class
+}//end of Pipe class

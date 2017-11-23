@@ -9,12 +9,12 @@
  * 
  */
 
-package application.Item;
+package application;
 
-public class Pipe extends Item{
-
-	public Pipe() {
+public class Key extends Item {
+	
+	public Key() {
 		
 	}//end of no-arg constructor
 	
-}//end of Pipe class
+}//end of Key class

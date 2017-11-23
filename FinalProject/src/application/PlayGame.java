@@ -13,6 +13,8 @@ package application;
 
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class PlayGame {
 
@@ -57,32 +59,66 @@ iv. This class will start your game*/
 		
 		//Do while loop determines number of players
 		int numPlayers;
+		
 		do {
 		System.out.println("Type 1 for single player or 2 for two-person multiplayer.");
 		numPlayers = sc.nextInt();
 		} while(numPlayers != 1 && numPlayers != 2);
 		
+		Player player1 = new Player();
+		Player player2 = new Player();
+		
 		//Number of players selected
 		if(numPlayers == 1) {
-			Player player1 = new Player();
 			System.out.println("What is your name, player 1?");
-			input = sc.nextLine();
-			player1.setName(input);
+			String name = sc.next();
+			player1.setName(name);
+			
 		} else if (numPlayers == 2) {
-			Player player1 = new Player();
 			System.out.println("What is your name, player 1?");
-			input = sc.nextLine();
-			player1.setName(input);
-			Player player2 = new Player();
+			String name = sc.next();
+			player1.setName(name);
 			System.out.println("What is your name, player 2?");
-			input = sc.nextLine();
-			player2.setName(input);
+			name = sc.next();
+			player2.setName(name);
 		}
 		
-		String continueGame;
+		String continueGame = "";
+		boolean gameEnd = false;
+		
+		String item;
+		ArrayList<String> commands = new ArrayList<String>();
+		commands.add("go north");
+		commands.add("go east");
+		commands.add("go south");
+		commands.add("go west");
+	      
+		int roomNum = 0;
 		
 		//game loop calling PlayGame and Player class methods
+		
+		if(numPlayers == 1) {
+			
 		do {
+			roomNum = 1;
+			game.setRoomNumber(roomNum);
+			Flashlight f = new Flashlight(false);
+			boolean flashlight = f.getStatus();
+			
+			System.out.println(game.getRoomDescription(flashlight));
+			String action = sc.next();
+			
+			for(String command: commands){
+				if(action.equals(command)){
+					game.action(command, flashlight, );
+				}
+			}
+			
+			if(action.equals("go north") || action.equals("go east") || action.equals("go south") || action.equals("go west")) {
+				
+			} else {
+				game.getCommandList();
+			}
 			
 			
 			
@@ -90,9 +126,20 @@ iv. This class will start your game*/
 			
 			
 			
-			continueGame = JOptionPane.showInputDialog("Game End. Do you want to play again? Yes or No?", null);
+			
+			gameEnd = true;
+			if(gameEnd == true) {
+			System.out.println("Game End, " + player1.getName() + ". Do you want to play again? Yes or No?");
+			continueGame = sc.next();
+			}	
 			
 		} while(continueGame.equals("yes") || continueGame.equals("Yes"));
+		
+		System.exit(0);
+		
+		}
+		
+		
 		
 		
 		

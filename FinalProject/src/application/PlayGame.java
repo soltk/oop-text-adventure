@@ -110,7 +110,7 @@ iv. This class will start your game*/
 			
 			for(String command: commands){
 				if(action.equals(command)){
-					game.action(command, flashlight, );
+					
 				}
 			}
 			

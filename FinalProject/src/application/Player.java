@@ -21,6 +21,7 @@ as location, name, etc.*/
 //instance variables
 private String name;
 private int health;
+private String room;
 
 
 public Player() {

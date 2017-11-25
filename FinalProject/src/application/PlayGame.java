@@ -45,101 +45,56 @@ iv. This class will start your game*/
 				" /( __.' `----'    \\____\\|_|  (_)/(     /( __.' \r\n" + 
 				"(__)                            (__)   (__)     ");
 		
-
 		Scanner sc = new Scanner(System.in);
-		System.out.print("Enter any character to begin or 'x' to quit the game: ");
-		String input = sc.nextLine();
-		if(input.equals("x")){
-			System.exit(0); //end game if input is x
-		}
-		input = "";
+		String input = "";
+		do {
+		System.out.print("Type Y for a New Game or N to Exit: ");
+		input = sc.next();
+		} while(!input.equals("Y") && !input.equals("y") && !input.equals("N") && !input.equals("n"));
 		
-		//Game is started
+		if(input.equals("N") || input.equals("n")) {
+			System.exit(0);
+		}
+		System.out.println("New Game Selected!");
 		StartAdventure game = new StartAdventure();
 		
-		//Do while loop determines number of players
-		int numPlayers;
-		
 		do {
-		System.out.println("Type 1 for single player or 2 for two-person multiplayer.");
-		numPlayers = sc.nextInt();
-		} while(numPlayers != 1 && numPlayers != 2);
+		System.out.print("Type 1 for Player or 2 for 2 Players: ");
+		input = sc.next();
+		} while(!input.equals("1") && !input.equals("2"));
 		
 		Player player1 = new Player();
-		Player player2 = new Player();
+		System.out.print("Player 1 name: ");
+		String name = sc.next();
+		player1.setName(name);
+		player1.setHealth(10);
 		
-		//Number of players selected
-		if(numPlayers == 1) {
-			System.out.println("What is your name, player 1?");
-			String name = sc.next();
-			player1.setName(name);
-			
-		} else if (numPlayers == 2) {
-			System.out.println("What is your name, player 1?");
-			String name = sc.next();
-			player1.setName(name);
-			System.out.println("What is your name, player 2?");
+		if(input.equals("2")) {
+			Player player2 = new Player();
+			System.out.print("Player 2 name: ");
 			name = sc.next();
 			player2.setName(name);
+			player2.setHealth(10);
 		}
 		
-		String continueGame = "";
-		boolean gameEnd = false;
+		int roomNum;
 		
-		String item;
-		ArrayList<String> commands = new ArrayList<String>();
-		commands.add("go north");
-		commands.add("go east");
-		commands.add("go south");
-		commands.add("go west");
-	      
-		int roomNum = 0;
-		
-		//game loop calling PlayGame and Player class methods
-		
-		if(numPlayers == 1) {
-			
+		//1 player game
 		do {
 			roomNum = 1;
 			game.setRoomNumber(roomNum);
-			Flashlight f = new Flashlight(false);
-			boolean flashlight = f.getStatus();
-			
-			System.out.println(game.getRoomDescription(flashlight));
-			String action = sc.next();
-			
-			for(String command: commands){
-				if(action.equals(command)){
-					
-				}
-			}
-			
-			if(action.equals("go north") || action.equals("go east") || action.equals("go south") || action.equals("go west")) {
-				
-			} else {
-				game.getCommandList();
-			}
+			boolean flashlight = false;
+			boolean bottle = false;
+			boolean pipe = false;
+			boolean keyCar = false;
+			boolean keyHall = false;
+			game.getRoomDescription(flashlight);
+			do {
+				input = sc.next();
+			} while(game.action(input, flashlight, bottle, pipe, keyCar, keyHall) != true);
 			
 			
-			
-			
-			
-			
-			
-			
-			gameEnd = true;
-			if(gameEnd == true) {
-			System.out.println("Game End, " + player1.getName() + ". Do you want to play again? Yes or No?");
-			continueGame = sc.next();
-			}	
-			
-		} while(continueGame.equals("yes") || continueGame.equals("Yes"));
-		
-		System.exit(0);
-		
-		}
-		
-		
+		} while(input.equals("Y") || input.equals("y"));
 		
 		
 		

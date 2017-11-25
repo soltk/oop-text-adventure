@@ -25,6 +25,14 @@ iv. Handles commands from the user (including those that cause
 exceptions)
  * */
 	
+	private final int LOBBY = 1;
+	private final int BAR = 2;
+	private final int KITCHEN = 3;
+	private final int HALLWAY = 4;
+	private final int BEDROOM = 5;
+	private final int BATHROOM = 6;
+	private final int OUTSIDE = 7;
+	
 	private int roomNum;
 	
 	public StartAdventure() {
@@ -47,7 +55,7 @@ exceptions)
 	public String getRoomDescription(boolean flashlight){
 		String description = "";
 		
-		if(roomNum == 1) {
+		if(roomNum == LOBBY) {
 			
 			if(flashlight == true) {
 			description = "You wake up in the mansion lobby..."
@@ -56,22 +64,22 @@ exceptions)
 					+ "\nIt's pitch dark, but you can see a light coming from the east. What do you want to do?";
 			}
 			
-		} else if(roomNum == 2) {
+		} else if(roomNum == BAR) {
 			description = "You are in the bar...";
 			
-		} else if(roomNum == 3) {
+		} else if(roomNum == KITCHEN) {
 			description = "You are in the kitchen...";
 			
-		} else if(roomNum == 4) {
+		} else if(roomNum == HALLWAY) {
 			description = "You are in the hallway...";
 			
-		} else if(roomNum == 5) {
+		} else if(roomNum == BEDROOM) {
 			description = "You are in the master bedroom...";
 			
-		} else if(roomNum == 6) {
+		} else if(roomNum == BATHROOM) {
 			description = "You are in the bathroom...";
 			
-		} else if(roomNum == 7) {
+		} else if(roomNum == OUTSIDE) {
 			description = "You are outside...";
 			
 		}
@@ -80,9 +88,10 @@ exceptions)
 		return description;
 	}
 	
-	public void action(String command, boolean flashlight, boolean bottle, boolean pipe, boolean keyCar, boolean keyHall) {
-
-		if(roomNum == 1) {
+	public boolean action(String command, boolean flashlight, boolean bottle, boolean pipe, boolean keyCar, boolean keyHall) {
+		boolean success = false;
+		
+		if(roomNum == LOBBY) {
 			
 			if(command.equals("go north")) {
 			
@@ -145,35 +154,35 @@ exceptions)
 				
 			}
 			
-		} else if(roomNum == 2) {
+		} else if(roomNum == BAR) {
 			
 			//if() {
 				//etc...
 			//}
 			
 			
-		} else if(roomNum == 3) {
+		} else if(roomNum == KITCHEN) {
 			
 			
-		} else if(roomNum == 4) {
+		} else if(roomNum == HALLWAY) {
 			
 			
-		} else if(roomNum == 5) {
+		} else if(roomNum == BEDROOM) {
 			
 			
-		} else if(roomNum == 6) {
+		} else if(roomNum == BATHROOM) {
 			
 			
-		} else if(roomNum == 7) {
+		} else if(roomNum == OUTSIDE) {
 			
 			
 		}
 		
 		
 		
-				
+		return success;
 		
-	} //end of move() method
+	} //end of action() method
 	
 	public String getCommandList() {
 		return "List of Commands:"
@@ -182,6 +191,7 @@ exceptions)
 				+ "\ngo west"
 				+ "\ngo south"
 				+ "\ndrink"
+				+ "\nheal"
 				+ "\nattack";
 	}
 	

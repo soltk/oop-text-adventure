@@ -78,6 +78,8 @@ iv. This class will start your game*/
 		}
 		
 		int roomNum;
+		String command = "";
+		boolean end = false;
 		
 		//1 player game
 		do {
@@ -88,13 +90,53 @@ iv. This class will start your game*/
 			boolean pipe = false;
 			boolean keyCar = false;
 			boolean keyHall = false;
-			game.getRoomDescription(flashlight);
-			do {
-				input = sc.next();
-			} while(game.action(input, flashlight, bottle, pipe, keyCar, keyHall) != true);
+			boolean[] inventory = {flashlight, bottle, pipe, keyCar, keyHall};
+			player1.setInventory(inventory);			
 			
+		do	{
+			if(roomNum == 1) {
+				game.getRoomDescription(flashlight);
+				do {
+					command = sc.next();
+					game.action(command, inventory);
+					
+				} while(roomNum == 1);
+			}
 			
-		} while(input.equals("Y") || input.equals("y"));
+			if(roomNum == 2) {
+				game.getRoomDescription(flashlight);
+				do {
+					command = sc.next();
+					game.action(command, inventory);
+					
+				} while(roomNum == 2);
+			}
+			
+			if(roomNum == 3) {
+				
+			}
+			
+			if(roomNum == 4) {
+				
+			}
+			
+			if(roomNum == 5) {
+				
+			}
+			
+			if(roomNum == 6) {
+				
+			}
+			
+			if(roomNum == 7) {
+				
+			}
+		} while(end != true);
+			
+			System.out.print("Game Over. Would you like to play again? ");
+			command = sc.next();
+			
+		} while(command.equals("Y") || command.equals("y"));
 		
 		
 		

@@ -23,16 +23,19 @@ private String name;
 private int health;
 private String room;
 
+private boolean[] inventory;
+
 
 public Player() {
 	this.name = "";
 	this.health = 0;
-	
+	this.inventory = new boolean[] {false, false, false, false, false};
 }
 
-public Player(String name, int health) {
+public Player(String name, int health, boolean[] inventory) {
 	this.name = name;
 	this.health = health;
+	this.inventory = inventory;
 }
 
 //Name methods
@@ -52,6 +55,14 @@ public void setHealth(int health) {
 
 public int getHealth() {
 	return this.health;
+}
+
+public void setInventory(boolean[] inventory) {
+	this.inventory = inventory;
+}
+
+public boolean[] getInventory() {
+	return this.inventory;
 }
 
 public boolean damage(int damageValue){ //method for damage

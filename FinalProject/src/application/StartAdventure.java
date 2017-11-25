@@ -33,10 +33,15 @@ exceptions)
 	private final int BATHROOM = 6;
 	private final int OUTSIDE = 7;
 	
+	private boolean flashlight;
+	private boolean bottle;
+	private boolean pipe;
+	private boolean keyCar;
+	private boolean keyHall;
+		
 	private int roomNum;
 	
 	public StartAdventure() {
-		
 		roomNum = 0;		
 	}
 	
@@ -88,8 +93,9 @@ exceptions)
 		return description;
 	}
 	
-	public boolean action(String command, boolean flashlight, boolean bottle, boolean pipe, boolean keyCar, boolean keyHall) {
-		boolean success = false;
+	public boolean[] action(String command, boolean[] inventory) {
+		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
+		boolean[] newInv = inventory;
 		
 		if(roomNum == LOBBY) {
 			
@@ -98,7 +104,7 @@ exceptions)
 				if(flashlight == true) {
 				
 					System.out.println("You picked up a key!"); //perhaps these items can be instanced variables?
-					
+					newInv[0] = true;
 				} else if(flashlight == false) {
 					
 					System.out.println("You can't see anything.");
@@ -109,6 +115,7 @@ exceptions)
 				
 				this.roomNum = 2;
 				System.out.println("You walk east towards the light.");
+				
 			}
 			
 			if(command.equals("go south")) {
@@ -124,6 +131,7 @@ exceptions)
 							
 						System.out.println("You successfully unlocked the hallway door! You proceed.");
 						this.roomNum = 4;
+						
 						
 					} else {
 				
@@ -180,7 +188,7 @@ exceptions)
 		
 		
 		
-		return success;
+		return newInv;
 		
 	} //end of action() method
 	

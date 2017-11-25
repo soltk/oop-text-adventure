@@ -60,7 +60,7 @@ exceptions)
 	public String getRoomDescription(boolean flashlight){
 		String description = "";
 		
-		if(roomNum == LOBBY) {
+		if(this.roomNum == LOBBY) {
 			
 			if(flashlight == true) {
 			description = "You wake up in the mansion lobby..."
@@ -69,22 +69,22 @@ exceptions)
 					+ "\nIt's pitch dark, but you can see a light coming from the east. What do you want to do?";
 			}
 			
-		} else if(roomNum == BAR) {
+		} else if(this.roomNum == BAR) {
 			description = "You are in the bar...";
 			
-		} else if(roomNum == KITCHEN) {
+		} else if(this.roomNum == KITCHEN) {
 			description = "You are in the kitchen...";
 			
-		} else if(roomNum == HALLWAY) {
+		} else if(this.roomNum == HALLWAY) {
 			description = "You are in the hallway...";
 			
-		} else if(roomNum == BEDROOM) {
+		} else if(this.roomNum == BEDROOM) {
 			description = "You are in the master bedroom...";
 			
-		} else if(roomNum == BATHROOM) {
+		} else if(this.roomNum == BATHROOM) {
 			description = "You are in the bathroom...";
 			
-		} else if(roomNum == OUTSIDE) {
+		} else if(this.roomNum == OUTSIDE) {
 			description = "You are outside...";
 			
 		}
@@ -96,10 +96,31 @@ exceptions)
 	public boolean[] action(String command, boolean[] inventory) {
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
+
+		String north = "go north";
+		String east = "go east";
+		String south = "go south";
+		String west = "go west";
+		String help = "help";
+		String heal = "heal";
+		String drink = "drink";
+		String attack = "attack";
 		
-		if(roomNum == LOBBY) {
+		if(command.compareTo(help) == 0) {
+			System.out.println("List of Commands:"
+					+ "\ngo north"
+					+ "\ngo east"
+					+ "\ngo west"
+					+ "\ngo south"
+					+ "\ndrink"
+					+ "\nheal"
+					+ "\nattack"
+					+ "\nhelp");
+		}
+		
+		if(this.roomNum == LOBBY) {
 			
-			if(command.equals("go north")) {
+			if(command.compareTo(north) == 0) {
 			
 				if(flashlight == true) {
 				
@@ -162,26 +183,26 @@ exceptions)
 				
 			}
 			
-		} else if(roomNum == BAR) {
+		} else if(this.roomNum == BAR) {
 			
 			//if() {
 				//etc...
 			//}
 			
 			
-		} else if(roomNum == KITCHEN) {
+		} else if(this.roomNum == KITCHEN) {
 			
 			
-		} else if(roomNum == HALLWAY) {
+		} else if(this.roomNum == HALLWAY) {
 			
 			
-		} else if(roomNum == BEDROOM) {
+		} else if(this.roomNum == BEDROOM) {
 			
 			
-		} else if(roomNum == BATHROOM) {
+		} else if(this.roomNum == BATHROOM) {
 			
 			
-		} else if(roomNum == OUTSIDE) {
+		} else if(this.roomNum == OUTSIDE) {
 			
 			
 		}

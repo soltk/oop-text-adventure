@@ -94,43 +94,47 @@ iv. This class will start your game*/
 			player1.setInventory(inventory);			
 			
 		do	{
-			if(roomNum == 1) {
-				game.getRoomDescription(flashlight);
+			if(game.getRoomNumber() == 1) {
 				do {
+					System.out.println(game.getRoomDescription(player1.getInventory()[0]));
+					System.out.println("Type 'help' for a list of commands.");
 					command = sc.next();
-					game.action(command, inventory);
-					
-				} while(roomNum == 1);
+					inventory = game.action(command, player1.getInventory());
+					player1.setInventory(inventory);
+				} while(game.getRoomNumber() == 1);
 			}
 			
-			if(roomNum == 2) {
-				game.getRoomDescription(flashlight);
+			if(game.getRoomNumber() == 2) {
+				System.out.println(game.getRoomDescription(player1.getInventory()[0]));
 				do {
+					System.out.println("Type 'help' for a list of commands.");
 					command = sc.next();
-					game.action(command, inventory);
-					
-				} while(roomNum == 2);
+					inventory = game.action(command, player1.getInventory());
+					player1.setInventory(inventory);
+				} while(game.getRoomNumber() == 2);
 			}
 			
-			if(roomNum == 3) {
+			if(game.getRoomNumber() == 3) {
 				
 			}
 			
-			if(roomNum == 4) {
+			if(game.getRoomNumber() == 4) {
 				
 			}
 			
-			if(roomNum == 5) {
+			if(game.getRoomNumber() == 5) {
 				
 			}
 			
-			if(roomNum == 6) {
+			if(game.getRoomNumber() == 6) {
 				
 			}
 			
-			if(roomNum == 7) {
+			if(game.getRoomNumber() == 7) {
 				
 			}
+			
+			end = true;
 		} while(end != true);
 			
 			System.out.print("Game Over. Would you like to play again? ");

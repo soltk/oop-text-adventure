@@ -81,7 +81,7 @@ public void heal(){ //method for healing
 } //end of heal method
 
 public String toString(){
-	String displayHealth = "The current health of the character is: " + this.health;
+	String displayHealth = "Your current health is: " + this.health;
 	return displayHealth;
 }
 

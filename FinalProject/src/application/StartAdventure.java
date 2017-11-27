@@ -32,12 +32,6 @@ exceptions)
 	private final int BEDROOM = 5;
 	private final int BATHROOM = 6;
 	private final int OUTSIDE = 7;
-	
-	private boolean flashlight;
-	private boolean bottle;
-	private boolean pipe;
-	private boolean keyCar;
-	private boolean keyHall;
 		
 	private int roomNum;
 	
@@ -63,14 +57,16 @@ exceptions)
 		if(this.roomNum == LOBBY) {
 			
 			if(flashlight == true) {
-			description = "You wake up in the mansion lobby..."
+			description = "You are back in the mansion lobby..."
 					+ "\nYou can see a glittering key to the north and a hallway to the west. What do you want to do?";
-			} else if(flashlight == false){description = "You wake up in the mansion lobby..."
+			} else if(flashlight == false){
+				description = "You wake up in the mansion lobby..."
 					+ "\nIt's pitch dark, but you can see a light coming from the east. What do you want to do?";
 			}
 			
 		} else if(this.roomNum == BAR) {
-			description = "You are in the bar...";
+			description = "You are in the bar..."
+					+ "\nYou see a flashlight on the counter and a bottle of liquor";
 			
 		} else if(this.roomNum == KITCHEN) {
 			description = "You are in the kitchen...";
@@ -93,139 +89,436 @@ exceptions)
 		return description;
 	}
 	
-	public boolean[] action(String command, boolean[] inventory) {
+	public boolean[] lobbyRoom(String command, boolean[] inventory) {
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
-
-		String north = "go north";
-		String east = "go east";
-		String south = "go south";
-		String west = "go west";
-		String help = "help";
-		String heal = "heal";
-		String drink = "drink";
-		String attack = "attack";
+				
+		if(command.compareTo("north") == 0) {			
+				if(newInv[0] == true) {				
+					System.out.println("You picked up a key!"); 
+					newInv[3] = true;
+					
+				} else if(newInv[0] == false) {					
+					System.out.println("You can't see anything.");
+					
+				}
+				
+			} else if(command.compareTo("east") == 0) {
+				System.out.println("You walk east towards the light.");
+				this.roomNum = 2;
+				
+			} else if(command.equals("south")) {
+				System.out.println("The entrance door is locked. You can't leave, but how did you get here?");
+				
+			} else if(command.equals("west")) {
+				
+				if(newInv[0] == true) {					
+					if(newInv[4] == true) {
+						System.out.println("You successfully unlocked the door to the hallway! You proceed west.");
+						this.roomNum = 4;
+						
+					} else {
+					System.out.println("The door to the hallway is locked. You need a key.");
+					
+					}
+					
+				} else if(newInv[0] == false){
+					System.out.println("You can't see that far.");
+					
+				}
+				
+			} else if(command.equals("drink")) {
+				
+				if(newInv[1] == false) {
+					System.out.println("Calm down, you party animal. You don't have anything to drink.");
+					
+				} else {
+					System.out.println("You drink all of the liquor in the bottle and now feel inebriated. "
+							+ "\nYou lose 1 health point!");
+					//Make player lose health somehow!!!
+					newInv[1] = false;
+					
+				}
+				
+			} else if(command.equals("help")) {
+				System.out.println("List of Commands:"
+						+ "\nnorth"
+						+ "\neast"
+						+ "\nwest"
+						+ "\nsouth"
+						+ "\ndrink"
+						+ "\nheal"
+						+ "\nattack"
+						+ "\nhelp");
+			}
 		
-		if(command.compareTo(help) == 0) {
+		return newInv; 
+		
+			
+		
+	} //end of action() method
+	
+
+	public boolean[] barRoom(String command, boolean[] inventory) {
+		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
+		boolean[] newInv = inventory;
+		
+		if(command.equals("north")) {
+			System.out.println("You pick up a flashlight and the bottle of liquor.");
+			newInv[0] = true;
+			
+		} else if(command.equals("east")) {
+			System.out.println("You walk east into the kitchen.");
+			this.roomNum = 3;
+			
+		} else if(command.equals("south")) {
+			System.out.println("There is nowhere for you to go.");
+			
+		} else if(command.equals("west")) {
+			System.out.println("You go west back to the lobby.");
+		
+		} else if(command.equals("drink")) {
+			
+			if(newInv[1] == true) {
+				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
+						+ "\nYou lost 1 health!");
+				//loss of health
+				newInv[1] = false;
+				
+			} else {
+				System.out.println("Calm down, party animal. You don't have anything to drink.");
+				
+			}
+		} else if(command.equals("attack")) {
+			
+			//enemy
+			
+		} else if(command.equals("heal")) {
+			
+			if(newInv[1] == true) {
+			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
+					+ "\nYou then wrap the cloth around your wound. "
+					+ "\nYou heal yourself by 1 point!");
+			//gain health
+			newInv[1] = false;
+			}
+			
+		} else if(command.equals("help")) {
 			System.out.println("List of Commands:"
-					+ "\ngo north"
-					+ "\ngo east"
-					+ "\ngo west"
-					+ "\ngo south"
+					+ "\nnorth"
+					+ "\neast"
+					+ "\nwest"
+					+ "\nsouth"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
 		}
 		
-		if(this.roomNum == LOBBY) {
+		
+		return newInv;
+	}
+	
+
+	public boolean[] kitchenRoom(String command, boolean[] inventory) {
+		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
+		boolean[] newInv = inventory;
+		
+		if(command.equals("north")) {
+			System.out.println("You pick up a flashlight and the bottle of liquor.");
+			newInv[0] = true;
 			
-			if(command.compareTo(north) == 0) {
+		} else if(command.equals("east")) {
+			System.out.println("You walk east into the kitchen.");
+			this.roomNum = 3;
 			
-				if(flashlight == true) {
-				
-					System.out.println("You picked up a key!"); //perhaps these items can be instanced variables?
-					newInv[0] = true;
-				} else if(flashlight == false) {
-					
-					System.out.println("You can't see anything.");
-				}
-			}
+		} else if(command.equals("south")) {
+			System.out.println("There is nowhere for you to go.");
 			
-			if(command.equals("go east")) {
-				
-				this.roomNum = 2;
-				System.out.println("You walk east towards the light.");
-				
-			}
+		} else if(command.equals("west")) {
+			System.out.println("You go west back to the lobby.");
+		
+		} else if(command.equals("drink")) {
 			
-			if(command.equals("go south")) {
+			if(newInv[1] == true) {
+				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
+						+ "\nYou lost 1 health!");
+				//loss of health
+				newInv[1] = false;
 				
-				System.out.println("The entrance door is locked. You can't leave, but how did you get here?");
-			}
-			
-			if(command.equals("go west")) {
-				
-				if(flashlight == true) {
-					
-					if(keyHall == true) {
-							
-						System.out.println("You successfully unlocked the hallway door! You proceed.");
-						this.roomNum = 4;
-						
-						
-					} else {
-				
-					System.out.println("The door to the hallway is locked. You need a key.");
-					
-					}
-					
-				} else if(flashlight == false){
-					
-					System.out.println("You can't see that far.");
-					
-				}
-				
-			if(command.equals("drink")) {
-				
-				if(bottle == false) {
-					
-					System.out.println("Calm down, you party animal. You don't have anything to drink.");
-					
-				} else {
-					
-					System.out.println("That was a bad idea.");
-					//Make player lose health somehow!!!
-					
-				}
+			} else {
+				System.out.println("Calm down, party animal. You don't have anything to drink.");
 				
 			}
-				
+		} else if(command.equals("attack")) {
+			
+			//enemy
+			
+		} else if(command.equals("heal")) {
+			
+			if(newInv[1] == true) {
+			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
+					+ "\nYou then wrap the cloth around your wound. "
+					+ "\nYou heal yourself by 1 point!");
+			//gain health
+			newInv[1] = false;
 			}
 			
-		} else if(this.roomNum == BAR) {
-			
-			//if() {
-				//etc...
-			//}
-			
-			
-		} else if(this.roomNum == KITCHEN) {
-			
-			
-		} else if(this.roomNum == HALLWAY) {
-			
-			
-		} else if(this.roomNum == BEDROOM) {
-			
-			
-		} else if(this.roomNum == BATHROOM) {
-			
-			
-		} else if(this.roomNum == OUTSIDE) {
-			
-			
+		} else if(command.equals("help")) {
+			System.out.println("List of Commands:"
+					+ "\nnorth"
+					+ "\neast"
+					+ "\nwest"
+					+ "\nsouth"
+					+ "\ndrink"
+					+ "\nheal"
+					+ "\nattack"
+					+ "\nhelp");
 		}
 		
 		
-		
 		return newInv;
-		
-	} //end of action() method
-	
-	public String getCommandList() {
-		return "List of Commands:"
-				+ "\ngo north"
-				+ "\ngo east"
-				+ "\ngo west"
-				+ "\ngo south"
-				+ "\ndrink"
-				+ "\nheal"
-				+ "\nattack";
 	}
 	
+	public boolean[] hallwayRoom(String command, boolean[] inventory) {
+		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
+		boolean[] newInv = inventory;
+		
+		if(command.equals("north")) {
+			System.out.println("You pick up a flashlight and the bottle of liquor.");
+			newInv[0] = true;
+			
+		} else if(command.equals("east")) {
+			System.out.println("You walk east into the kitchen.");
+			this.roomNum = 3;
+			
+		} else if(command.equals("south")) {
+			System.out.println("There is nowhere for you to go.");
+			
+		} else if(command.equals("west")) {
+			System.out.println("You go west back to the lobby.");
+		
+		} else if(command.equals("drink")) {
+			
+			if(newInv[1] == true) {
+				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
+						+ "\nYou lost 1 health!");
+				//loss of health
+				newInv[1] = false;
+				
+			} else {
+				System.out.println("Calm down, party animal. You don't have anything to drink.");
+				
+			}
+		} else if(command.equals("attack")) {
+			
+			//enemy
+			
+		} else if(command.equals("heal")) {
+			
+			if(newInv[1] == true) {
+			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
+					+ "\nYou then wrap the cloth around your wound. "
+					+ "\nYou heal yourself by 1 point!");
+			//gain health
+			newInv[1] = false;
+			}
+			
+		} else if(command.equals("help")) {
+			System.out.println("List of Commands:"
+					+ "\nnorth"
+					+ "\neast"
+					+ "\nwest"
+					+ "\nsouth"
+					+ "\ndrink"
+					+ "\nheal"
+					+ "\nattack"
+					+ "\nhelp");
+		}
+		
+		
+		return newInv;
+	}
 	
+	public boolean[] bedRoom(String command, boolean[] inventory) {
+		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
+		boolean[] newInv = inventory;
+		
+		if(command.equals("north")) {
+			System.out.println("You pick up a flashlight and the bottle of liquor.");
+			newInv[0] = true;
+			
+		} else if(command.equals("east")) {
+			System.out.println("You walk east into the kitchen.");
+			this.roomNum = 3;
+			
+		} else if(command.equals("south")) {
+			System.out.println("There is nowhere for you to go.");
+			
+		} else if(command.equals("west")) {
+			System.out.println("You go west back to the lobby.");
+		
+		} else if(command.equals("drink")) {
+			
+			if(newInv[1] == true) {
+				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
+						+ "\nYou lost 1 health!");
+				//loss of health
+				newInv[1] = false;
+				
+			} else {
+				System.out.println("Calm down, party animal. You don't have anything to drink.");
+				
+			}
+		} else if(command.equals("attack")) {
+			
+			//enemy
+			
+		} else if(command.equals("heal")) {
+			
+			if(newInv[1] == true) {
+			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
+					+ "\nYou then wrap the cloth around your wound. "
+					+ "\nYou heal yourself by 1 point!");
+			//gain health
+			newInv[1] = false;
+			}
+			
+		} else if(command.equals("help")) {
+			System.out.println("List of Commands:"
+					+ "\nnorth"
+					+ "\neast"
+					+ "\nwest"
+					+ "\nsouth"
+					+ "\ndrink"
+					+ "\nheal"
+					+ "\nattack"
+					+ "\nhelp");
+		}
+		
+		
+		return newInv;
+	}
 	
+	public boolean[] bathRoom(String command, boolean[] inventory) {
+		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
+		boolean[] newInv = inventory;
+		
+		if(command.equals("north")) {
+			System.out.println("You pick up a flashlight and the bottle of liquor.");
+			newInv[0] = true;
+			
+		} else if(command.equals("east")) {
+			System.out.println("You walk east into the kitchen.");
+			this.roomNum = 3;
+			
+		} else if(command.equals("south")) {
+			System.out.println("There is nowhere for you to go.");
+			
+		} else if(command.equals("west")) {
+			System.out.println("You go west back to the lobby.");
+		
+		} else if(command.equals("drink")) {
+			
+			if(newInv[1] == true) {
+				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
+						+ "\nYou lost 1 health!");
+				//loss of health
+				newInv[1] = false;
+				
+			} else {
+				System.out.println("Calm down, party animal. You don't have anything to drink.");
+				
+			}
+		} else if(command.equals("attack")) {
+			
+			//enemy
+			
+		} else if(command.equals("heal")) {
+			
+			if(newInv[1] == true) {
+			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
+					+ "\nYou then wrap the cloth around your wound. "
+					+ "\nYou heal yourself by 1 point!");
+			//gain health
+			newInv[1] = false;
+			}
+			
+		} else if(command.equals("help")) {
+			System.out.println("List of Commands:"
+					+ "\nnorth"
+					+ "\neast"
+					+ "\nwest"
+					+ "\nsouth"
+					+ "\ndrink"
+					+ "\nheal"
+					+ "\nattack"
+					+ "\nhelp");
+		}
+		
+		
+		return newInv;
+	}
+	
+	public boolean[] outsideRoom(String command, boolean[] inventory) {
+		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
+		boolean[] newInv = inventory;
+		
+		if(command.equals("north")) {
+			System.out.println("You pick up a flashlight and the bottle of liquor.");
+			newInv[0] = true;
+			
+		} else if(command.equals("east")) {
+			System.out.println("You walk east into the kitchen.");
+			this.roomNum = 3;
+			
+		} else if(command.equals("south")) {
+			System.out.println("There is nowhere for you to go.");
+			
+		} else if(command.equals("west")) {
+			System.out.println("You go west back to the lobby.");
+		
+		} else if(command.equals("drink")) {
+			
+			if(newInv[1] == true) {
+				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
+						+ "\nYou lost 1 health!");
+				//loss of health
+				newInv[1] = false;
+				
+			} else {
+				System.out.println("Calm down, party animal. You don't have anything to drink.");
+				
+			}
+		} else if(command.equals("attack")) {
+			
+			//enemy
+			
+		} else if(command.equals("heal")) {
+			
+			if(newInv[1] == true) {
+			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
+					+ "\nYou then wrap the cloth around your wound. "
+					+ "\nYou heal yourself by 1 point!");
+			//gain health
+			newInv[1] = false;
+			}
+			
+		} else if(command.equals("help")) {
+			System.out.println("List of Commands:"
+					+ "\nnorth"
+					+ "\neast"
+					+ "\nwest"
+					+ "\nsouth"
+					+ "\ndrink"
+					+ "\nheal"
+					+ "\nattack"
+					+ "\nhelp");
+		}
+		
+		
+		return newInv;
+	}
 	
 	
 }//end of StartAdventure class

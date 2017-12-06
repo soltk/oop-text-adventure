@@ -11,7 +11,7 @@
 
 package application;
 
-public class Pipe extends Item{
+public class Pipe extends Item {
 
 	public Pipe() {
 		

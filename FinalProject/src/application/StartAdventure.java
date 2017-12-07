@@ -93,24 +93,26 @@ exceptions)
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 				
-		if(command.compareTo("north") == 0) {			
-				if(newInv[0] == true) {				
-					System.out.println("You picked up a key!"); 
-					newInv[3] = true;
-					
-				} else if(newInv[0] == false) {					
-					System.out.println("You can't see anything.");
-					
-				}
+		command = command.trim();
+		
+		if(command.equalsIgnoreCase("go north")) {			
+			if(newInv[0] == true) {				
+				System.out.println("You picked up a key!"); 
+				newInv[3] = true;
 				
-			} else if(command.compareTo("east") == 0) {
+			} else if(newInv[0] == false) {					
+				System.out.println("You can't see anything.");
+				
+			}
+			
+		} else if(command.equalsIgnoreCase("go east")) {
 				System.out.println("You walk east towards the light.");
 				this.roomNum = 2;
 				
-			} else if(command.equals("south")) {
+			} else if(command.equalsIgnoreCase("go south")) {
 				System.out.println("The entrance door is locked. You can't leave, but how did you get here?");
 				
-			} else if(command.equals("west")) {
+			} else if(command.equalsIgnoreCase("go west")) {
 				
 				if(newInv[0] == true) {					
 					if(newInv[4] == true) {
@@ -127,7 +129,7 @@ exceptions)
 					
 				}
 				
-			} else if(command.equals("drink")) {
+			} else if(command.equalsIgnoreCase("drink")) {
 				
 				if(newInv[1] == false) {
 					System.out.println("Calm down, you party animal. You don't have anything to drink.");
@@ -140,16 +142,18 @@ exceptions)
 					
 				}
 				
-			} else if(command.equals("help")) {
+			} else if(command.equalsIgnoreCase("help")) {
 				System.out.println("List of Commands:"
-						+ "\nnorth"
-						+ "\neast"
-						+ "\nwest"
-						+ "\nsouth"
+						+ "\ngo north"
+						+ "\ngo east"
+						+ "\ngo west"
+						+ "\ngo south"
 						+ "\ndrink"
 						+ "\nheal"
 						+ "\nattack"
 						+ "\nhelp");
+			} else {
+				System.out.println("Please enter only commands from the command list.");
 			}
 		
 		return newInv; 
@@ -163,21 +167,23 @@ exceptions)
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
-		if(command.equals("north")) {
+		command = command.trim();
+		
+		if(command.equalsIgnoreCase("go north")) {
 			System.out.println("You pick up a flashlight and the bottle of liquor.");
 			newInv[0] = true;
 			
-		} else if(command.equals("east")) {
+		} else if(command.equalsIgnoreCase("go east")) {
 			System.out.println("You walk east into the kitchen.");
 			this.roomNum = 3;
 			
-		} else if(command.equals("south")) {
+		} else if(command.equalsIgnoreCase("go south")) {
 			System.out.println("There is nowhere for you to go.");
 			
-		} else if(command.equals("west")) {
+		} else if(command.equalsIgnoreCase("go west")) {
 			System.out.println("You go west back to the lobby.");
 		
-		} else if(command.equals("drink")) {
+		} else if(command.equalsIgnoreCase("drink")) {
 			
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
@@ -189,11 +195,11 @@ exceptions)
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
 				
 			}
-		} else if(command.equals("attack")) {
+		} else if(command.equalsIgnoreCase("attack")) {
 			
 			//enemy
 			
-		} else if(command.equals("heal")) {
+		} else if(command.equalsIgnoreCase("heal")) {
 			
 			if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
@@ -203,16 +209,18 @@ exceptions)
 			newInv[1] = false;
 			}
 			
-		} else if(command.equals("help")) {
+		} else if(command.equalsIgnoreCase("help")) {
 			System.out.println("List of Commands:"
-					+ "\nnorth"
-					+ "\neast"
-					+ "\nwest"
-					+ "\nsouth"
+					+ "\ngo north"
+					+ "\ngo east"
+					+ "\ngo west"
+					+ "\ngo south"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
+		} else {
+			System.out.println("Please enter only commands from the command list.");
 		}
 		
 		
@@ -224,21 +232,23 @@ exceptions)
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
-		if(command.equals("north")) {
+		command = command.trim();
+		
+		if(command.equalsIgnoreCase("go north")) {
 			System.out.println("You pick up a flashlight and the bottle of liquor.");
 			newInv[0] = true;
 			
-		} else if(command.equals("east")) {
+		} else if(command.equalsIgnoreCase("go east")) {
 			System.out.println("You walk east into the kitchen.");
 			this.roomNum = 3;
 			
-		} else if(command.equals("south")) {
+		} else if(command.equalsIgnoreCase("go south")) {
 			System.out.println("There is nowhere for you to go.");
 			
-		} else if(command.equals("west")) {
+		} else if(command.equalsIgnoreCase("go west")) {
 			System.out.println("You go west back to the lobby.");
 		
-		} else if(command.equals("drink")) {
+		} else if(command.equalsIgnoreCase("drink")) {
 			
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
@@ -250,11 +260,11 @@ exceptions)
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
 				
 			}
-		} else if(command.equals("attack")) {
+		} else if(command.equalsIgnoreCase("attack")) {
 			
 			//enemy
 			
-		} else if(command.equals("heal")) {
+		} else if(command.equalsIgnoreCase("heal")) {
 			
 			if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
@@ -264,18 +274,19 @@ exceptions)
 			newInv[1] = false;
 			}
 			
-		} else if(command.equals("help")) {
+		} else if(command.equalsIgnoreCase("help")) {
 			System.out.println("List of Commands:"
-					+ "\nnorth"
-					+ "\neast"
-					+ "\nwest"
-					+ "\nsouth"
+					+ "\ngo north"
+					+ "\ngo east"
+					+ "\ngo west"
+					+ "\ngo south"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
+		} else {
+			System.out.println("Please enter only commands from the command list.");
 		}
-		
 		
 		return newInv;
 	}
@@ -284,21 +295,23 @@ exceptions)
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
-		if(command.equals("north")) {
+		command = command.trim();
+		
+		if(command.equalsIgnoreCase("go north")) {
 			System.out.println("You pick up a flashlight and the bottle of liquor.");
 			newInv[0] = true;
 			
-		} else if(command.equals("east")) {
+		} else if(command.equalsIgnoreCase("go east")) {
 			System.out.println("You walk east into the kitchen.");
 			this.roomNum = 3;
 			
-		} else if(command.equals("south")) {
+		} else if(command.equalsIgnoreCase("go south")) {
 			System.out.println("There is nowhere for you to go.");
 			
-		} else if(command.equals("west")) {
+		} else if(command.equalsIgnoreCase("go west")) {
 			System.out.println("You go west back to the lobby.");
 		
-		} else if(command.equals("drink")) {
+		} else if(command.equalsIgnoreCase("drink")) {
 			
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
@@ -310,11 +323,11 @@ exceptions)
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
 				
 			}
-		} else if(command.equals("attack")) {
+		} else if(command.equalsIgnoreCase("attack")) {
 			
 			//enemy
 			
-		} else if(command.equals("heal")) {
+		} else if(command.equalsIgnoreCase("heal")) {
 			
 			if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
@@ -324,18 +337,19 @@ exceptions)
 			newInv[1] = false;
 			}
 			
-		} else if(command.equals("help")) {
+		} else if(command.equalsIgnoreCase("help")) {
 			System.out.println("List of Commands:"
-					+ "\nnorth"
-					+ "\neast"
-					+ "\nwest"
-					+ "\nsouth"
+					+ "\ngo north"
+					+ "\ngo east"
+					+ "\ngo west"
+					+ "\ngo south"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
-		}
-		
+		}  else {
+			System.out.println("Please enter only commands from the command list.");
+		}		
 		
 		return newInv;
 	}
@@ -344,21 +358,23 @@ exceptions)
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
-		if(command.equals("north")) {
+		command = command.trim();
+		
+		if(command.equalsIgnoreCase("go north")) {
 			System.out.println("You pick up a flashlight and the bottle of liquor.");
 			newInv[0] = true;
 			
-		} else if(command.equals("east")) {
+		} else if(command.equalsIgnoreCase("go east")) {
 			System.out.println("You walk east into the kitchen.");
 			this.roomNum = 3;
 			
-		} else if(command.equals("south")) {
+		} else if(command.equalsIgnoreCase("go south")) {
 			System.out.println("There is nowhere for you to go.");
 			
-		} else if(command.equals("west")) {
+		} else if(command.equalsIgnoreCase("go west")) {
 			System.out.println("You go west back to the lobby.");
 		
-		} else if(command.equals("drink")) {
+		} else if(command.equalsIgnoreCase("drink")) {
 			
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
@@ -370,11 +386,11 @@ exceptions)
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
 				
 			}
-		} else if(command.equals("attack")) {
+		} else if(command.equalsIgnoreCase("attack")) {
 			
 			//enemy
 			
-		} else if(command.equals("heal")) {
+		} else if(command.equalsIgnoreCase("heal")) {
 			
 			if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
@@ -384,16 +400,18 @@ exceptions)
 			newInv[1] = false;
 			}
 			
-		} else if(command.equals("help")) {
+		} else if(command.equalsIgnoreCase("help")) {
 			System.out.println("List of Commands:"
-					+ "\nnorth"
-					+ "\neast"
-					+ "\nwest"
-					+ "\nsouth"
+					+ "\ngo north"
+					+ "\ngo east"
+					+ "\ngo west"
+					+ "\ngo south"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
+		} else {
+			System.out.println("Please enter only commands from the command list.");
 		}
 		
 		
@@ -404,21 +422,23 @@ exceptions)
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
-		if(command.equals("north")) {
+		command = command.trim();
+		
+		if(command.equalsIgnoreCase("go north")) {
 			System.out.println("You pick up a flashlight and the bottle of liquor.");
 			newInv[0] = true;
 			
-		} else if(command.equals("east")) {
+		} else if(command.equalsIgnoreCase("go east")) {
 			System.out.println("You walk east into the kitchen.");
 			this.roomNum = 3;
 			
-		} else if(command.equals("south")) {
+		} else if(command.equalsIgnoreCase("go south")) {
 			System.out.println("There is nowhere for you to go.");
 			
-		} else if(command.equals("west")) {
+		} else if(command.equalsIgnoreCase("go west")) {
 			System.out.println("You go west back to the lobby.");
 		
-		} else if(command.equals("drink")) {
+		} else if(command.equalsIgnoreCase("drink")) {
 			
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
@@ -430,11 +450,11 @@ exceptions)
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
 				
 			}
-		} else if(command.equals("attack")) {
+		} else if(command.equalsIgnoreCase("attack")) {
 			
 			//enemy
 			
-		} else if(command.equals("heal")) {
+		} else if(command.equalsIgnoreCase("heal")) {
 			
 			if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
@@ -444,16 +464,18 @@ exceptions)
 			newInv[1] = false;
 			}
 			
-		} else if(command.equals("help")) {
+		} else if(command.equalsIgnoreCase("help")) {
 			System.out.println("List of Commands:"
-					+ "\nnorth"
-					+ "\neast"
-					+ "\nwest"
-					+ "\nsouth"
+					+ "\ngo north"
+					+ "\ngo east"
+					+ "\ngo west"
+					+ "\ngo south"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
+		} else {
+			System.out.println("Please enter only commands from the command list.");
 		}
 		
 		
@@ -464,21 +486,23 @@ exceptions)
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
-		if(command.equals("north")) {
+		command = command.trim();
+		
+		if(command.equalsIgnoreCase("go north")) {
 			System.out.println("You pick up a flashlight and the bottle of liquor.");
 			newInv[0] = true;
 			
-		} else if(command.equals("east")) {
+		} else if(command.equalsIgnoreCase("go east")) {
 			System.out.println("You walk east into the kitchen.");
 			this.roomNum = 3;
 			
-		} else if(command.equals("south")) {
+		} else if(command.equalsIgnoreCase("go south")) {
 			System.out.println("There is nowhere for you to go.");
 			
-		} else if(command.equals("west")) {
+		} else if(command.equalsIgnoreCase("go west")) {
 			System.out.println("You go west back to the lobby.");
 		
-		} else if(command.equals("drink")) {
+		} else if(command.equalsIgnoreCase("drink")) {
 			
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
@@ -490,11 +514,11 @@ exceptions)
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
 				
 			}
-		} else if(command.equals("attack")) {
+		} else if(command.equalsIgnoreCase("attack")) {
 			
 			//enemy
 			
-		} else if(command.equals("heal")) {
+		} else if(command.equalsIgnoreCase("heal")) {
 			
 			if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
@@ -504,16 +528,18 @@ exceptions)
 			newInv[1] = false;
 			}
 			
-		} else if(command.equals("help")) {
+		} else if(command.equalsIgnoreCase("help")) {
 			System.out.println("List of Commands:"
-					+ "\nnorth"
-					+ "\neast"
-					+ "\nwest"
-					+ "\nsouth"
+					+ "\ngo north"
+					+ "\ngo east"
+					+ "\ngo west"
+					+ "\ngo south"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
+		}  else {
+			System.out.println("Please enter only commands from the command list.");
 		}
 		
 		

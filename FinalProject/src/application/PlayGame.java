@@ -50,9 +50,9 @@ iv. This class will start your game*/
 		do {
 		System.out.print("Type Y for a New Game or N to Exit: ");
 		input = sc.next();
-		} while(!input.equals("Y") && !input.equals("y") && !input.equals("N") && !input.equals("n"));
+		} while(!input.equalsIgnoreCase("y") && !input.equalsIgnoreCase("n"));
 		
-		if(input.equals("N") || input.equals("n")) {
+		if(input.equalsIgnoreCase("n")) {
 			System.exit(0);
 		}
 		System.out.println("New Game Selected!");
@@ -157,7 +157,7 @@ iv. This class will start your game*/
 			System.out.print("Game Over. Would you like to play again? ");
 			command = sc.nextLine();
 			
-		} while(command.equals("Y") || command.equals("y"));
+		} while(command.equalsIgnoreCase("y"));
 		
 		
 		

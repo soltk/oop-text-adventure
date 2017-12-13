@@ -65,8 +65,8 @@ exceptions)
 			}
 			
 		} else if(this.roomNum == BAR) {
-			description = "You are in the bar..."
-					+ "\nYou see a flashlight on the counter and a bottle of liquor";
+			description = "You are now in the bar."
+					+ "\nAs you scan the room, you can see a flashlight on the counter next to a bottle of liquor. You’re feeling thirsty, but the flashlight can also come in handy to navigate the dark. What would you like to do?";
 			
 		} else if(this.roomNum == KITCHEN) {
 			description = "You are in the kitchen...";

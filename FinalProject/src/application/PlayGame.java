@@ -53,6 +53,7 @@ iv. This class will start your game*/
 		} while(!input.equalsIgnoreCase("y") && !input.equalsIgnoreCase("n"));
 		
 		if(input.equalsIgnoreCase("n")) {
+			System.out.println("Exiting...");
 			System.exit(0);
 		}
 		System.out.println("New Game Selected!");

@@ -95,74 +95,70 @@ exceptions)
 				
 		command = command.trim();
 		
-		if(command.equalsIgnoreCase("go north")) {			
-			if(newInv[0] == true) {				
-				System.out.println("You picked up a key!"); 
-				newInv[3] = true;
-				
-			} else if(newInv[0] == false) {					
-				System.out.println("You can't see anything.");
-				
-			}
-			
-		} else if(command.equalsIgnoreCase("go east")) {
-				System.out.println("You walk east towards the light.");
-				this.roomNum = 2;
-				
-			} else if(command.equalsIgnoreCase("go south")) {
-				System.out.println("The entrance door is locked. You can't leave, but how did you get here?");
-				
-			} else if(command.equalsIgnoreCase("go west")) {
-				
-				if(newInv[0] == true) {					
-					if(newInv[4] == true) {
-						System.out.println("You successfully unlocked the door to the hallway! You proceed west.");
-						this.roomNum = 4;
+		if(command.equalsIgnoreCase("go north"))						
+			System.out.println("There's nothing in that direction."); 
 						
-					} else {
+		else if(command.equalsIgnoreCase("go east")) {
+			System.out.println("You walk east towards the light.");
+			this.roomNum = 2;
+				
+		} else if(command.equalsIgnoreCase("go south"))
+			System.out.println("The entrance door is locked. You can't leave, but how did you get here?");
+				
+		else if(command.equalsIgnoreCase("go west")) {
+			if(newInv[0] == true) {					
+				if(newInv[4] == true) {
+					System.out.println("You successfully unlocked the door to the hallway! You proceed west.");
+					this.roomNum = 4;
+					
+				} else
 					System.out.println("The door to the hallway is locked. You need a key.");
+			
+			} else if(newInv[0] == false)
+				System.out.println("It's too dark to see that far.");
+		}
+			
+		else if(command.equalsIgnoreCase("take") && newInv[0] == false)			
+			System.out.println("You feel around for the key but cannot find it in the dark.");
+			
+		else if(command.equalsIgnoreCase("take") && newInv[0] == true && newInv[4])
+			System.out.println("There is nothing to take.");
+		
+		else if(command.equalsIgnoreCase("take") && newInv[0] == true && newInv[4] == false) {
+			System.out.println("You take the key.");
+			newInv[4] = true;	
 					
-					}
-					
-				} else if(newInv[0] == false){
-					System.out.println("You can't see that far.");
-					
-				}
+		} else if(command.equalsIgnoreCase("drink")) {
 				
-			} else if(command.equalsIgnoreCase("drink")) {
+			if(newInv[1] == false)
+				System.out.println("Calm down, you party animal. You don't have anything to drink.");
+			
+			else {
+				System.out.println("You drink all of the liquor in the bottle and now feel inebriated. "
+						+ "\nYou lose 1 health point!");
+				//Make player lose health somehow!!!
+				newInv[1] = false;
+			}
 				
-				if(newInv[1] == false) {
-					System.out.println("Calm down, you party animal. You don't have anything to drink.");
-					
-				} else {
-					System.out.println("You drink all of the liquor in the bottle and now feel inebriated. "
-							+ "\nYou lose 1 health point!");
-					//Make player lose health somehow!!!
-					newInv[1] = false;
-					
-				}
-				
-			} else if(command.equalsIgnoreCase("help")) {
+		} else if(command.equalsIgnoreCase("help")) {
 				System.out.println("List of Commands:"
 						+ "\ngo north"
 						+ "\ngo east"
 						+ "\ngo west"
 						+ "\ngo south"
+						+ "\ntake"
 						+ "\ndrink"
 						+ "\nheal"
 						+ "\nattack"
 						+ "\nhelp");
-			} else {
-				System.out.println("Please enter only commands from the command list.");
-			}
+				
+		} else
+			System.out.println("Please enter only commands from the command list.");
 		
-		return newInv; 
-		
-			
+		return newInv;
 		
 	} //end of action() method
 	
-
 	public boolean[] barRoom(String command, boolean[] inventory) {
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
@@ -227,7 +223,6 @@ exceptions)
 		return newInv;
 	}
 	
-
 	public boolean[] kitchenRoom(String command, boolean[] inventory) {
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;

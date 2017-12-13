@@ -28,7 +28,7 @@ private boolean[] inventory;
 
 public Player() {
 	this.name = "";
-	this.health = 0;
+	this.health = 3;
 	this.inventory = new boolean[] {false, false, false, false, false};
 }
 
@@ -65,9 +65,9 @@ public boolean[] getInventory() {
 	return this.inventory;
 }
 
-public boolean damage(int damageValue){ //method for damage
+public boolean damage(){ //method for damage
 	boolean gameOver=false;
-	this.health = this.health - damageValue;
+	this.health--;
 
 	if (this.health <= 0) {
 		gameOver=true;
@@ -77,7 +77,12 @@ public boolean damage(int damageValue){ //method for damage
 } //end of damage method
 
 public void heal(){ //method for healing
-	this.health++;
+	
+	if(this.health < 3) {
+		this.health++;
+	} else {
+		System.out.println("You are at full health.");
+	}
 } //end of heal method
 
 public String toString(){

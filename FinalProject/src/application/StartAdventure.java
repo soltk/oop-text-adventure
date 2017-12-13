@@ -132,7 +132,7 @@ exceptions)
 		return description;
 	}
 	
-	public boolean[] lobbyRoom(String command, boolean[] inventory) {
+	public boolean[] lobbyRoom(String command, boolean[] inventory, Player player) {
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 				
@@ -179,7 +179,7 @@ exceptions)
 			else {
 				System.out.println("You drink all of the liquor in the bottle and now feel inebriated. "
 						+ "\nYou lose 1 health point!");
-				//Make player lose health somehow!!!
+				player.damage();
 				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 				
@@ -205,10 +205,10 @@ exceptions)
 					if(newInv[2] == true) {System.out.println("Faucet Pipe");}
 					if(newInv[3] == true) {System.out.println("Car Keys");}
 					if(newInv[4] == true) {System.out.println("Hallway Keys");}
+					
 		} else if(command.equalsIgnoreCase("view health")){
+			System.out.println("Player Health: " + player.getHealth());
 			
-			System.out.println("Player Health:");
-					//player health once implemented
 		} else
 			System.out.println("Please enter only commands from the command list.");
 		
@@ -216,7 +216,7 @@ exceptions)
 		
 	} //end of action() method
 	
-	public boolean[] barRoom(String command, boolean[] inventory) {
+	public boolean[] barRoom(String command, boolean[] inventory, Player player) {
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
@@ -252,7 +252,7 @@ exceptions)
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
-				//loss of health
+				player.damage();
 				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
 			} else {
@@ -265,11 +265,13 @@ exceptions)
 			
 		} else if(command.equalsIgnoreCase("heal")) {
 			
-			if(newInv[1] == true) {
+			if(player.getHealth() == 3) {
+				System.out.print("Your health is already full.");
+			} else if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
-			//gain health
+			player.heal();
 			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 			
@@ -296,16 +298,15 @@ exceptions)
 				if(newInv[3] == true) {System.out.println("Car Keys");}
 				if(newInv[4] == true) {System.out.println("Hallway Keys");}
 	} else if(command.equalsIgnoreCase("view health")){
+		System.out.println("Player Health: " + player.getHealth());
 		
-		System.out.println("Player Health:");
-				//player health once implemented
 	} else
 			System.out.println("Please enter only commands from the command list.");	
 		
 		return newInv;
 	}
 	
-	public boolean[] kitchenRoom(String command, boolean[] inventory) {
+	public boolean[] kitchenRoom(String command, boolean[] inventory, Player player) {
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
@@ -329,7 +330,7 @@ exceptions)
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
-				//loss of health
+				player.damage();
 				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
 			} else
@@ -352,11 +353,13 @@ exceptions)
 			
 		} else if(command.equalsIgnoreCase("heal")) {
 			
-			if(newInv[1] == true) {
+			if(player.getHealth() == 3) {
+				System.out.print("Your health is already full.");
+			} else if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
-			//gain health
+			player.heal();
 			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 			
@@ -383,16 +386,15 @@ exceptions)
 				if(newInv[3] == true) {System.out.println("Car Keys");}
 				if(newInv[4] == true) {System.out.println("Hallway Keys");}
 	} else if(command.equalsIgnoreCase("view health")){
+		System.out.println("Player Health: " + player.getHealth());
 		
-		System.out.println("Player Health:");
-				//player health once implemented
 	} else
 			System.out.println("Please enter only commands from the command list.");
 		
 		return newInv;
 	}
 	
-	public boolean[] hallwayRoom(String command, boolean[] inventory) {
+	public boolean[] hallwayRoom(String command, boolean[] inventory, Player player) {
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
@@ -420,7 +422,7 @@ exceptions)
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
-				//loss of health
+				player.damage();
 				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
 			} else {
@@ -433,11 +435,13 @@ exceptions)
 			
 		} else if(command.equalsIgnoreCase("heal")) {
 			
-			if(newInv[1] == true) {
+			if(player.getHealth() == 3) {
+				System.out.print("Your health is already full.");
+			} else if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
-			//gain health
+			player.heal();
 			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 			
@@ -464,16 +468,15 @@ exceptions)
 				if(newInv[3] == true) {System.out.println("Car Keys");}
 				if(newInv[4] == true) {System.out.println("Hallway Keys");}
 	} else if(command.equalsIgnoreCase("view health")){
+		System.out.println("Player Health: " + player.getHealth());
 		
-		System.out.println("Player Health:");
-				//player health once implemented
 	} else
 			System.out.println("Please enter only commands from the command list.");
 		
 		return newInv;
 	}
 	
-	public boolean[] bedRoom(String command, boolean[] inventory) {
+	public boolean[] bedRoom(String command, boolean[] inventory, Player player) {
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
@@ -498,7 +501,7 @@ exceptions)
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
-				//loss of health
+				player.damage();
 				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
 			} else {
@@ -511,13 +514,16 @@ exceptions)
 			
 		} else if(command.equalsIgnoreCase("heal")) {
 			
-			if(newInv[1] == true) {
+			if(player.getHealth() == 3) {
+				System.out.print("Your health is already full.");
+			} else if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
-			//gain health
+			player.heal();
 			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
+		
 			
 		} else if(command.equalsIgnoreCase("help")) {
 			System.out.println("List of Commands:"
@@ -542,16 +548,15 @@ exceptions)
 				if(newInv[3] == true) {System.out.println("Car Keys");}
 				if(newInv[4] == true) {System.out.println("Hallway Keys");}
 	} else if(command.equalsIgnoreCase("view health")){
+		System.out.println("Player Health: " + player.getHealth());
 		
-		System.out.println("Player Health:");
-				//player health once implemented
 	} else
 			System.out.println("Please enter only commands from the command list.");
 				
 		return newInv;
 	}
 	
-	public boolean[] bathRoom(String command, boolean[] inventory) {
+	public boolean[] bathRoom(String command, boolean[] inventory, Player player) {
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
@@ -583,7 +588,7 @@ exceptions)
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
-				//loss of health
+				player.damage();
 				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
 			} else
@@ -595,13 +600,16 @@ exceptions)
 			
 		} else if(command.equalsIgnoreCase("heal")) {
 			
-			if(newInv[1] == true) {
+			if(player.getHealth() == 3) {
+				System.out.print("Your health is already full.");
+			} else if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
-			//gain health
+			player.heal();
 			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
+			
 			
 		} else if(command.equalsIgnoreCase("help")) {
 			System.out.println("List of Commands:"
@@ -626,16 +634,15 @@ exceptions)
 				if(newInv[3] == true) {System.out.println("Car Keys");}
 				if(newInv[4] == true) {System.out.println("Hallway Keys");}
 	} else if(command.equalsIgnoreCase("view health")){
+		System.out.println("Player Health: " + player.getHealth());
 		
-		System.out.println("Player Health:");
-				//player health once implemented
 	} else
 			System.out.println("Please enter only commands from the command list.");		
 		
 		return newInv;
 	}
 	
-	public boolean[] outsideRoom(String command, boolean[] inventory) {
+	public boolean[] outsideRoom(String command, boolean[] inventory, Player player) {
 		//for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4 = keyHall
 		boolean[] newInv = inventory;
 		
@@ -658,7 +665,7 @@ exceptions)
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
-				//loss of health
+				player.damage();
 				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
 			} else
@@ -670,11 +677,13 @@ exceptions)
 			
 		} else if(command.equalsIgnoreCase("heal")) {
 			
-			if(newInv[1] == true) {
+			if(player.getHealth() == 3) {
+				System.out.print("Your health is already full.");
+			} else if(newInv[1] == true) {
 			System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
-			//gain health
+			player.heal();
 			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 			
@@ -701,9 +710,8 @@ exceptions)
 				if(newInv[3] == true) {System.out.println("Car Keys");}
 				if(newInv[4] == true) {System.out.println("Hallway Keys");}
 	} else if(command.equalsIgnoreCase("view health")){
+		System.out.println("Player Health: " + player.getHealth());
 		
-		System.out.println("Player Health:");
-				//player health once implemented
 	}  else
 			System.out.println("Please enter only commands from the command list.");
 		

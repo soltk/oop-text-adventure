@@ -63,7 +63,6 @@ iv. This class will start your game*/
 		System.out.print("Player 1 name: ");
 		String name = sc.next();
 		player1.setName(name);
-		player1.setHealth(10);
 		
 		int roomNum;
 		String command = "";
@@ -87,7 +86,7 @@ iv. This class will start your game*/
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
-					inventory = game.lobbyRoom(command, player1.getInventory());
+					inventory = game.lobbyRoom(command, player1.getInventory(), player1);
 					player1.setInventory(inventory); 
 				} while(game.getRoomNumber() == 1);
 			}
@@ -97,7 +96,7 @@ iv. This class will start your game*/
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
-					inventory = game.barRoom(command, player1.getInventory());
+					inventory = game.barRoom(command, player1.getInventory(), player1);
 					player1.setInventory(inventory);					
 				} while(game.getRoomNumber() == 2);
 			}
@@ -107,7 +106,7 @@ iv. This class will start your game*/
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
-					inventory = game.kitchenRoom(command, player1.getInventory());
+					inventory = game.kitchenRoom(command, player1.getInventory(), player1);
 					player1.setInventory(inventory);					
 				} while(game.getRoomNumber() == 3);
 			}
@@ -117,7 +116,7 @@ iv. This class will start your game*/
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
-					inventory = game.hallwayRoom(command, player1.getInventory());
+					inventory = game.hallwayRoom(command, player1.getInventory(), player1);
 					player1.setInventory(inventory);					
 				} while(game.getRoomNumber() == 4);
 			}
@@ -127,7 +126,7 @@ iv. This class will start your game*/
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
-					inventory = game.bedRoom(command, player1.getInventory());
+					inventory = game.bedRoom(command, player1.getInventory(), player1);
 					player1.setInventory(inventory);					
 				} while(game.getRoomNumber() == 5);
 			}
@@ -137,7 +136,7 @@ iv. This class will start your game*/
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
-					inventory = game.bathRoom(command, player1.getInventory());
+					inventory = game.bathRoom(command, player1.getInventory(), player1);
 					player1.setInventory(inventory);					
 				} while(game.getRoomNumber() == 6);
 			}
@@ -147,7 +146,7 @@ iv. This class will start your game*/
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
-					inventory = game.outsideRoom(command, player1.getInventory());
+					inventory = game.outsideRoom(command, player1.getInventory(), player1);
 					player1.setInventory(inventory);					
 				} while(game.getRoomNumber() == 7);
 			}

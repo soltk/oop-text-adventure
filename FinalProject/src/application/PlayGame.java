@@ -152,7 +152,6 @@ iv. This class will start your game*/
 				} while(game.getRoomNumber() == 7);
 			}
 			
-			end = true;
 		} while(end != true);
 			
 			System.out.print("Game Over. Would you like to play again? ");

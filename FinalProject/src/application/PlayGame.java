@@ -68,6 +68,7 @@ public class PlayGame {
 
 		// 1 player game
 		do {
+			System.out.println("NEW GAME STARTED");
 			roomNum = 1;
 			game.setRoomNumber(roomNum);
 			boolean flashlight = false;
@@ -145,7 +146,7 @@ public class PlayGame {
 
 			System.out.print("Game Over. Type Y to play again.");
 			command = sc.nextLine();
-
+			System.out.println("");
 		} while (command.equalsIgnoreCase("y"));
 
 	}// end of main method

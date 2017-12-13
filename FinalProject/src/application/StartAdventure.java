@@ -69,7 +69,7 @@ public class StartAdventure {
 			} else {
 				description = "You are inside the lobby of a haunted mansion. You’re not sure how you got here, "
 						+ "\nbut the door behind you is dead bolted shut. There is no turning back now..."
-						+ "\nIt's pitch dark, but you can see a failt light coming from the east of where you're standing. "
+						+ "\nIt's pitch dark, but you can see a faint light coming from the east of where you're standing. "
 						+ "\nWhat do you want to do?";
 			}
 
@@ -110,9 +110,10 @@ public class StartAdventure {
 			}
 
 		} else if (this.roomNum == BEDROOM) {
-			description = "You are in the master bedroom... " + "\nThere is a puzzle on the door to the bathroom."
-					+ "\nIt seems that a new puzzle appears every time you come back to this room."
-					+ "\nThe puzzle must be solved for you to get into the bathroom.";
+			description = "You are in the master bedroom... " + "\nThere is a question on the door to the bathroom."
+					+ "\nThe question must be answered correctly for you to get into the bathroom."
+					+ "\nThe question on the door reads 'What color is a ghost? Be alert. (this totally isn't foreshadowing btw)'" 
+					+ "\nW-what? What an unsettling statement. At least, it's an easy question.";
 
 		} else if (this.roomNum == BATHROOM) {
 
@@ -334,8 +335,7 @@ public class StartAdventure {
 						"You foolishly approach the beast without a weapon!" + "\nIt tries to maul you to death.");
 				int pDamage = player.damage(enemy.attack());
 				if (player.getDeath() == true) {
-					System.out.println("You were killed! "
-							+ "\nBAD END");
+					System.out.println("You were killed! " + "\nBAD END");
 					this.roomNum = 0;
 				} else {
 					System.out.println("There was a slim chance you would survive, but you did!" + "You received +"
@@ -444,8 +444,8 @@ public class StartAdventure {
 		command = command.trim();
 
 		if (command.equalsIgnoreCase("go north")) {
-			System.out.println("You walk north into the bathroom.");
-			this.roomNum = 5;
+			System.out
+					.println("You must answer the question first to enter the bathroom." + "\nWhat color is a ghost?");
 
 		} else if (command.equalsIgnoreCase("go east")) {
 			System.out.println("You walk back into the hallway and to the lobby because it gives you the creeps.");
@@ -492,6 +492,11 @@ public class StartAdventure {
 			System.out.println("List of Commands:" + "\ngo north" + "\ngo east" + "\ngo west" + "\ngo south" + "\ntake"
 					+ "\ndrink" + "\nheal" + "\nattack" + "\nview inventory" + "\nview health" + "\nhelp");
 
+		} else if (command.equalsIgnoreCase("white")) {
+
+			System.out.println("You hear a click, and the door opens." + "\nYou pass through to the bathroom.");
+			this.roomNum = 5;
+
 		} else if (command.equalsIgnoreCase("view inventory")) {
 
 			System.out.println("List of Items in Inventory:");
@@ -514,7 +519,7 @@ public class StartAdventure {
 			System.out.println(player);
 
 		} else
-			System.out.println("Please enter only commands from the command list.");
+			System.out.println("Incorrect answer and invalid command.");
 
 		return newInv;
 	}
@@ -629,8 +634,7 @@ public class StartAdventure {
 				System.out.println("Without any weapon, you foolishly charge at the shadow.");
 				int pDamage = player.damage(enemy.attack());
 				if (player.getDeath() == true) {
-					System.out.println("You were killed!"
-							+ "\nBAD END");
+					System.out.println("You were killed!" + "\nBAD END");
 					this.roomNum = 0;
 				} else {
 					System.out.println("There was a slim chance you would survive, but you did!" + "\nYou received +"
@@ -698,8 +702,7 @@ public class StartAdventure {
 					System.out.println("It strikes you back!");
 					int pDamage = player.damage(enemy.attack());
 					if (player.getDeath() == true) {
-						System.out.println("You were killed!"
-								+ "\nBAD END");
+						System.out.println("You were killed!" + "\nBAD END");
 						this.roomNum = 0;
 					} else {
 						System.out.println("You were knocked back and received +" + pDamage + " damage!");

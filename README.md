@@ -12,8 +12,27 @@ Written by:
 A. GAME DESCRIPTION
  
 	The objective of the game is to escape from a haunted mansion.  
-	The player will need to find and use items, navigate the mansion, and encounter and fight enemies.  
+	The player will need to find and use items, navigate the mansion, and encounter 
+	and fight enemies.  
 	The game ends when the player is either defeated or successfully escapes.
+ 	
+ 	This single-player game is called Mansion Escape and is structured as a text adventure 
+ 	that incorporates various topics we have learned in OOP. The objective of the game is 
+ 	to escape a haunted mansion by moving from room to room in search of the next open door 
+ 	and any useful items that may help the player escape or fight off the monsters that 
+ 	may lurk within. The player begins in the lobby, moves through the bar, the kitchen, 
+ 	the hallway, the master bedroom, and the bathroom until they reach outside. Through 
+ 	each room, the user is presented with a puzzle or task, and the various rooms may be 
+ 	locked or closed, so the user must take the textual clues to discover where they can 
+ 	go next.
+ 	
+ 	At the conclusion of the game, the user must defeat the final enemy to make it to 
+ 	their car, which can only be accessed if the player had picked up their car keys in 
+ 	one of the previous rooms. There are different endings depending on player actions, 
+ 	so it is essentially a “Choose your own adventure” game. The game serves as a mix 
+ 	between storytelling and problem solving although it lacks an actual UI or graphics, 
+ 	so it will hopefully entertain players who are highly imaginative and love reading 
+ 	and logic puzzles!
  	
 B. HOW TO PLAY
 

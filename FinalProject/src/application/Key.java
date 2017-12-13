@@ -12,9 +12,9 @@
 package application;
 
 public class Key extends Item {
-	
+
 	public Key() {
-		
-	}//end of no-arg constructor
-	
-}//end of Key class
+
+	}// end of no-arg constructor
+
+}// end of Key class

@@ -14,9 +14,9 @@ package application;
 public class Item {
 
 	String name;
-	
+
 	public Item() {
-		
-	}//end of Constructor
-	
-}//end of Item class
+
+	}// end of Constructor
+
+}// end of Item class

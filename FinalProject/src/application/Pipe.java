@@ -14,7 +14,7 @@ package application;
 public class Pipe extends Item {
 
 	public Pipe() {
-		
-	}//end of no-arg constructor
-	
-}//end of Pipe class
+
+	}// end of no-arg constructor
+
+}// end of Pipe class

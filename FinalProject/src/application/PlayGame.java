@@ -83,7 +83,7 @@ iv. This class will start your game*/
 			
 		do	{
 			if(game.getRoomNumber() == 1) {
-				System.out.println(game.getRoomDescription(player1.getInventory()[0]));
+				System.out.println(game.getRoomDescription(player1.getInventory()));
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
@@ -93,7 +93,7 @@ iv. This class will start your game*/
 			}
 			
 			if(game.getRoomNumber() == 2) {
-				System.out.println(game.getRoomDescription(player1.getInventory()[0]));
+				System.out.println(game.getRoomDescription(player1.getInventory()));
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
@@ -103,7 +103,7 @@ iv. This class will start your game*/
 			}
 			
 			if(game.getRoomNumber() == 3) {
-				System.out.println(game.getRoomDescription(player1.getInventory()[0]));
+				System.out.println(game.getRoomDescription(player1.getInventory()));
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
@@ -113,7 +113,7 @@ iv. This class will start your game*/
 			}
 			
 			if(game.getRoomNumber() == 4) {
-				System.out.println(game.getRoomDescription(player1.getInventory()[0]));
+				System.out.println(game.getRoomDescription(player1.getInventory()));
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
@@ -123,7 +123,7 @@ iv. This class will start your game*/
 			}
 			
 			if(game.getRoomNumber() == 5) {
-				System.out.println(game.getRoomDescription(player1.getInventory()[0]));
+				System.out.println(game.getRoomDescription(player1.getInventory()));
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
@@ -133,7 +133,7 @@ iv. This class will start your game*/
 			}
 			
 			if(game.getRoomNumber() == 6) {
-				System.out.println(game.getRoomDescription(player1.getInventory()[0]));
+				System.out.println(game.getRoomDescription(player1.getInventory()));
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
@@ -143,7 +143,7 @@ iv. This class will start your game*/
 			}
 			
 			if(game.getRoomNumber() == 7) {
-				System.out.println(game.getRoomDescription(player1.getInventory()[0]));
+				System.out.println(game.getRoomDescription(player1.getInventory()));
 				System.out.print("Type 'help' for a list of commands.\n");
 				do {
 					command = sc.nextLine();
@@ -154,13 +154,10 @@ iv. This class will start your game*/
 			
 		} while(end != true);
 			
-			System.out.print("Game Over. Would you like to play again? ");
+			System.out.print("Game Over. Type Y to play again.");
 			command = sc.nextLine();
 			
 		} while(command.equalsIgnoreCase("y"));
-		
-		
-		
 		
 		
 	}//end of main method

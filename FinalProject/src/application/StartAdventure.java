@@ -750,6 +750,11 @@ public class StartAdventure {
 		} else if (command.equalsIgnoreCase("view health")) {
 			System.out.println(player);
 
+		} else if(command.equalsIgnoreCase("skip")) {
+			//secret command to skip boss fight
+			System.out.println("The shadow disappeared before you had to fight it.");
+			enemy.setDeath(true);
+			
 		} else {
 			System.out.println("Please enter only commands from the command list.");
 		}

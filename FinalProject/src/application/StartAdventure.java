@@ -23,7 +23,7 @@ iii. Displays relevant information to the user, such as “you are here”
 indicator
 iv. Handles commands from the user (including those that cause
 exceptions)
- * */
+**/
 	
 	private final int LOBBY = 1;
 	private final int BAR = 2;
@@ -137,7 +137,7 @@ exceptions)
 				System.out.println("You drink all of the liquor in the bottle and now feel inebriated. "
 						+ "\nYou lose 1 health point!");
 				//Make player lose health somehow!!!
-				newInv[1] = false;
+				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 				
 		} else if(command.equalsIgnoreCase("help")) {
@@ -165,19 +165,30 @@ exceptions)
 		
 		command = command.trim();
 		
-		if(command.equalsIgnoreCase("go north")) {
-			System.out.println("You pick up a flashlight and the bottle of liquor.");
-			newInv[0] = true;
+		if(command.equalsIgnoreCase("go north"))
+			System.out.println("There's nothing in that direction.");
 			
-		} else if(command.equalsIgnoreCase("go east")) {
+		else if(command.equalsIgnoreCase("go east")) {
 			System.out.println("You walk east into the kitchen.");
 			this.roomNum = 3;
 			
-		} else if(command.equalsIgnoreCase("go south")) {
-			System.out.println("There is nowhere for you to go.");
+		} else if(command.equalsIgnoreCase("go south"))
+			System.out.println("There's nothing in that direction.");
 			
-		} else if(command.equalsIgnoreCase("go west")) {
+		else if(command.equalsIgnoreCase("go west")) {
 			System.out.println("You go west back to the lobby.");
+			this.roomNum = 1;
+			
+		} else if(command.equalsIgnoreCase("take") && newInv[0] == true && newInv[1] == true)
+			System.out.println("There is nothing to take.");
+		
+		else if(command.equalsIgnoreCase("take") && newInv[0] == true && newInv[1] == false)
+			System.out.println("There is nothing to take.");
+		
+		else if(command.equalsIgnoreCase("take") && newInv[0] == false && newInv[1] == false) {
+			System.out.println("You pick up the flashlight and the bottle of liquor.");
+			newInv[0] = true;
+			newInv[1] = true;
 		
 		} else if(command.equalsIgnoreCase("drink")) {
 			
@@ -185,7 +196,7 @@ exceptions)
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
 				//loss of health
-				newInv[1] = false;
+				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
 			} else {
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
@@ -202,7 +213,7 @@ exceptions)
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
 			//gain health
-			newInv[1] = false;
+			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 			
 		} else if(command.equalsIgnoreCase("help")) {
@@ -211,14 +222,13 @@ exceptions)
 					+ "\ngo east"
 					+ "\ngo west"
 					+ "\ngo south"
+					+ "\ntake"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
-		} else {
-			System.out.println("Please enter only commands from the command list.");
-		}
-		
+		} else
+			System.out.println("Please enter only commands from the command list.");	
 		
 		return newInv;
 	}
@@ -229,19 +239,18 @@ exceptions)
 		
 		command = command.trim();
 		
-		if(command.equalsIgnoreCase("go north")) {
-			System.out.println("You pick up a flashlight and the bottle of liquor.");
-			newInv[0] = true;
-			
-		} else if(command.equalsIgnoreCase("go east")) {
-			System.out.println("You walk east into the kitchen.");
-			this.roomNum = 3;
-			
-		} else if(command.equalsIgnoreCase("go south")) {
+		if(command.equalsIgnoreCase("go north"))
 			System.out.println("There is nowhere for you to go.");
 			
-		} else if(command.equalsIgnoreCase("go west")) {
-			System.out.println("You go west back to the lobby.");
+		else if(command.equalsIgnoreCase("go east"))
+			System.out.println("There is nowhere for you to go.");
+			
+		else if(command.equalsIgnoreCase("go south"))
+			System.out.println("There is nowhere for you to go.");
+			
+		else if(command.equalsIgnoreCase("go west")) {
+			System.out.println("You go west back to the bar.");
+			this.roomNum = 2;
 		
 		} else if(command.equalsIgnoreCase("drink")) {
 			
@@ -249,13 +258,23 @@ exceptions)
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
 				//loss of health
-				newInv[1] = false;
+				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
-			} else {
+			} else
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
-				
-			}
-		} else if(command.equalsIgnoreCase("attack")) {
+		
+		// ****************************** KITCHEN ROOM'S KEY PICKUP FUNCTIONALITY WILL NOT WORK IF ENEMY FUNCTIONALITY IS NOT IMPLEMENTED
+		} else if(command.equalsIgnoreCase("take") && newInv[3] == false /** && enemy is defeated */) {
+			System.out.println("You step around your defeated enemy and pick up another key.");
+			newInv[3] = true;
+			
+		} else if(command.equalsIgnoreCase("take") && newInv[3] == false /** && enemy is alive */)
+			System.out.println("You see another key on the floor behind your enemy. " + "\nThe enemy will not let you pass!");
+		
+		else if(command.equalsIgnoreCase("take") && newInv[3] == true)
+			System.out.println("There is nothing to take.");
+		
+		else if(command.equalsIgnoreCase("attack")) {
 			
 			//enemy
 			
@@ -266,7 +285,7 @@ exceptions)
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
 			//gain health
-			newInv[1] = false;
+			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 			
 		} else if(command.equalsIgnoreCase("help")) {
@@ -275,13 +294,13 @@ exceptions)
 					+ "\ngo east"
 					+ "\ngo west"
 					+ "\ngo south"
+					+ "\ntake"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
-		} else {
+		} else
 			System.out.println("Please enter only commands from the command list.");
-		}
 		
 		return newInv;
 	}
@@ -292,27 +311,30 @@ exceptions)
 		
 		command = command.trim();
 		
-		if(command.equalsIgnoreCase("go north")) {
-			System.out.println("You pick up a flashlight and the bottle of liquor.");
-			newInv[0] = true;
+		if(command.equalsIgnoreCase("go north"))
+			System.out.println("There's nothing in that direction.");
 			
-		} else if(command.equalsIgnoreCase("go east")) {
-			System.out.println("You walk east into the kitchen.");
-			this.roomNum = 3;
+		else if(command.equalsIgnoreCase("go east")) {
+			System.out.println("You walk east back into the lobby.");
+			this.roomNum = 1;
 			
-		} else if(command.equalsIgnoreCase("go south")) {
-			System.out.println("There is nowhere for you to go.");
+		} else if(command.equalsIgnoreCase("go south"))
+			System.out.println("There's nothing in that direction.");
 			
-		} else if(command.equalsIgnoreCase("go west")) {
-			System.out.println("You go west back to the lobby.");
+		else if(command.equalsIgnoreCase("go west")) {
+			System.out.println("You go west into the master bedroom.");
+			this.roomNum = 5;
+			
+		} else if(command.equalsIgnoreCase("take"))
+			System.out.println("There is nothing to take.");
 		
-		} else if(command.equalsIgnoreCase("drink")) {
+		else if(command.equalsIgnoreCase("drink")) {
 			
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
 				//loss of health
-				newInv[1] = false;
+				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
 			} else {
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
@@ -329,7 +351,7 @@ exceptions)
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
 			//gain health
-			newInv[1] = false;
+			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 			
 		} else if(command.equalsIgnoreCase("help")) {
@@ -338,13 +360,13 @@ exceptions)
 					+ "\ngo east"
 					+ "\ngo west"
 					+ "\ngo south"
+					+ "\ntake"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
-		}  else {
+		}  else
 			System.out.println("Please enter only commands from the command list.");
-		}		
 		
 		return newInv;
 	}
@@ -356,18 +378,18 @@ exceptions)
 		command = command.trim();
 		
 		if(command.equalsIgnoreCase("go north")) {
-			System.out.println("You pick up a flashlight and the bottle of liquor.");
-			newInv[0] = true;
+			System.out.println("You walk north into the bathroom.");
+			this.roomNum = 6;
 			
 		} else if(command.equalsIgnoreCase("go east")) {
-			System.out.println("You walk east into the kitchen.");
-			this.roomNum = 3;
+			System.out.println("You walk back into the hallway.");
+			this.roomNum = 4;
 			
 		} else if(command.equalsIgnoreCase("go south")) {
-			System.out.println("There is nowhere for you to go.");
+			System.out.println("There's nothing in that direction.");
 			
 		} else if(command.equalsIgnoreCase("go west")) {
-			System.out.println("You go west back to the lobby.");
+			System.out.println("There's nothing in that direction.");
 		
 		} else if(command.equalsIgnoreCase("drink")) {
 			
@@ -375,7 +397,7 @@ exceptions)
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
 				//loss of health
-				newInv[1] = false;
+				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
 			} else {
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
@@ -392,7 +414,7 @@ exceptions)
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
 			//gain health
-			newInv[1] = false;
+			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 			
 		} else if(command.equalsIgnoreCase("help")) {
@@ -401,15 +423,14 @@ exceptions)
 					+ "\ngo east"
 					+ "\ngo west"
 					+ "\ngo south"
+					+ "\ntake"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
-		} else {
+		} else
 			System.out.println("Please enter only commands from the command list.");
-		}
-		
-		
+				
 		return newInv;
 	}
 	
@@ -420,18 +441,25 @@ exceptions)
 		command = command.trim();
 		
 		if(command.equalsIgnoreCase("go north")) {
-			System.out.println("You pick up a flashlight and the bottle of liquor.");
-			newInv[0] = true;
+			System.out.println("PIPE/WINDOW INTERACTION");
+			this.roomNum = 7;
 			
 		} else if(command.equalsIgnoreCase("go east")) {
-			System.out.println("You walk east into the kitchen.");
-			this.roomNum = 3;
-			
-		} else if(command.equalsIgnoreCase("go south")) {
 			System.out.println("There is nowhere for you to go.");
 			
-		} else if(command.equalsIgnoreCase("go west")) {
-			System.out.println("You go west back to the lobby.");
+		} else if(command.equalsIgnoreCase("go south")) {
+			System.out.println("You walk back into the master bedroom.");
+			this.roomNum = 5;
+			
+		} else if(command.equalsIgnoreCase("go west"))
+			System.out.println("There is nowhere for you to go.");
+			
+		else if(command.equalsIgnoreCase("take") && newInv[2] == true)
+			System.out.println("There is nothing to take");
+		
+		else if(command.equalsIgnoreCase("take") && newInv[2] == false) {
+			System.out.println("You pick up the pipe.");
+			newInv[2] = true;
 		
 		} else if(command.equalsIgnoreCase("drink")) {
 			
@@ -439,12 +467,11 @@ exceptions)
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
 				//loss of health
-				newInv[1] = false;
+				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
-			} else {
+			} else
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
 				
-			}
 		} else if(command.equalsIgnoreCase("attack")) {
 			
 			//enemy
@@ -456,7 +483,7 @@ exceptions)
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
 			//gain health
-			newInv[1] = false;
+			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 			
 		} else if(command.equalsIgnoreCase("help")) {
@@ -465,14 +492,13 @@ exceptions)
 					+ "\ngo east"
 					+ "\ngo west"
 					+ "\ngo south"
+					+ "\ntake"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
-		} else {
-			System.out.println("Please enter only commands from the command list.");
-		}
-		
+		} else
+			System.out.println("Please enter only commands from the command list.");		
 		
 		return newInv;
 	}
@@ -483,32 +509,29 @@ exceptions)
 		
 		command = command.trim();
 		
-		if(command.equalsIgnoreCase("go north")) {
-			System.out.println("You pick up a flashlight and the bottle of liquor.");
-			newInv[0] = true;
+		if(command.equalsIgnoreCase("go north"))
+			System.out.println("ENEMY INTERACTION");
 			
-		} else if(command.equalsIgnoreCase("go east")) {
-			System.out.println("You walk east into the kitchen.");
-			this.roomNum = 3;
+		else if(command.equalsIgnoreCase("go east"))
+			System.out.println("There is a fence you cannot climb.");
 			
-		} else if(command.equalsIgnoreCase("go south")) {
-			System.out.println("There is nowhere for you to go.");
+		else if(command.equalsIgnoreCase("go south"))
+			System.out.println("Jagged glass prevents you from climbing back into the window.");
 			
-		} else if(command.equalsIgnoreCase("go west")) {
-			System.out.println("You go west back to the lobby.");
+		else if(command.equalsIgnoreCase("go west"))
+			System.out.println("There is a fence you cannot climb.");
 		
-		} else if(command.equalsIgnoreCase("drink")) {
+		else if(command.equalsIgnoreCase("drink")) {
 			
 			if(newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
 						+ "\nYou lost 1 health!");
 				//loss of health
-				newInv[1] = false;
+				newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 				
-			} else {
+			} else
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
-				
-			}
+			
 		} else if(command.equalsIgnoreCase("attack")) {
 			
 			//enemy
@@ -520,7 +543,7 @@ exceptions)
 					+ "\nYou then wrap the cloth around your wound. "
 					+ "\nYou heal yourself by 1 point!");
 			//gain health
-			newInv[1] = false;
+			newInv[1] = false; //*************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO LONGER BE USED
 			}
 			
 		} else if(command.equalsIgnoreCase("help")) {
@@ -529,17 +552,15 @@ exceptions)
 					+ "\ngo east"
 					+ "\ngo west"
 					+ "\ngo south"
+					+ "\ntake"
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
 					+ "\nhelp");
-		}  else {
+		}  else
 			System.out.println("Please enter only commands from the command list.");
-		}
-		
 		
 		return newInv;
 	}
-	
 	
 }//end of StartAdventure class

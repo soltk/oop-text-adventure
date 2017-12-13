@@ -1,3 +1,14 @@
+/*
+ * Written by:
+ * 
+ * Liz Berberena
+ * Jack Davitt
+ * Shazia Mansuri
+ * Simran Nanwani
+ * Huda Yousef
+ * 
+ */
+
 package application;
 import java.util.Random;
 

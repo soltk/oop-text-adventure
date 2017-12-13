@@ -23,19 +23,20 @@ public class Player {
 	// instance variables
 	private String name;
 	private int health;
-	private String room;
-
+	private boolean death;
 	private boolean[] inventory;
 
 	public Player() {
 		this.name = "";
 		this.health = 3;
+		this.death = false;
 		this.inventory = new boolean[] { false, false, false, false, false };
 	}
 
-	public Player(String name, int health, boolean[] inventory) {
+	public Player(String name, int health, boolean death, boolean[] inventory) {
 		this.name = name;
 		this.health = health;
+		this.death = death;
 		this.inventory = inventory;
 	}
 
@@ -57,6 +58,14 @@ public class Player {
 	public int getHealth() {
 		return this.health;
 	}
+	
+	public void setDeath(boolean death) {
+		this.death = death;
+	}
+
+	public boolean getDeath() {
+		return this.death;
+	}
 
 	public void setInventory(boolean[] inventory) {
 		this.inventory = inventory;
@@ -66,15 +75,14 @@ public class Player {
 		return this.inventory;
 	}
 
-	public boolean damage(int damage) { // method for damage
-		boolean gameOver = false;
+	public int damage(int damage) { // method for damage
 		this.health = this.health - damage;
 
 		if (this.health <= 0) {
-			gameOver = true;
+			this.death = true;
 		}
 
-		return gameOver;
+		return damage;
 	} // end of damage method
 
 	public void heal() { // method for healing

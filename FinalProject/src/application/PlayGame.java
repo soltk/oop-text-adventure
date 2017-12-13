@@ -82,7 +82,7 @@ public class PlayGame {
 
 			do {
 				if (game.getRoomNumber() == 1) {
-					System.out.println(game.getRoomDescription(player1.getInventory()));
+					System.out.println(game.getRoomDescription(player1.getInventory(), null));
 					System.out.print("Type 'help' for a list of commands.\n");
 					do {
 						command = sc.nextLine();
@@ -92,7 +92,7 @@ public class PlayGame {
 				}
 
 				if (game.getRoomNumber() == 2) {
-					System.out.println(game.getRoomDescription(player1.getInventory()));
+					System.out.println(game.getRoomDescription(player1.getInventory(), null));
 					System.out.print("Type 'help' for a list of commands.\n");
 					do {
 						command = sc.nextLine();
@@ -102,7 +102,7 @@ public class PlayGame {
 				}
 
 				if (game.getRoomNumber() == 3) {
-					System.out.println(game.getRoomDescription(player1.getInventory()));
+					System.out.println(game.getRoomDescription(player1.getInventory(), enemy1));
 					System.out.print("Type 'help' for a list of commands.\n");
 					do {
 						command = sc.nextLine();
@@ -112,46 +112,36 @@ public class PlayGame {
 				}
 
 				if (game.getRoomNumber() == 4) {
-					System.out.println(game.getRoomDescription(player1.getInventory()));
-					System.out.print("Type 'help' for a list of commands.\n");
-					do {
-						command = sc.nextLine();
-						inventory = game.hallwayRoom(command, player1.getInventory(), player1);
-						player1.setInventory(inventory);
-					} while (game.getRoomNumber() == 4);
-				}
-
-				if (game.getRoomNumber() == 5) {
-					System.out.println(game.getRoomDescription(player1.getInventory()));
+					System.out.println(game.getRoomDescription(player1.getInventory(), null));
 					System.out.print("Type 'help' for a list of commands.\n");
 					do {
 						command = sc.nextLine();
 						inventory = game.bedRoom(command, player1.getInventory(), player1);
 						player1.setInventory(inventory);
-					} while (game.getRoomNumber() == 5);
+					} while (game.getRoomNumber() == 4);
 				}
 
-				if (game.getRoomNumber() == 6) {
-					System.out.println(game.getRoomDescription(player1.getInventory()));
+				if (game.getRoomNumber() == 5) {
+					System.out.println(game.getRoomDescription(player1.getInventory(), null));
 					System.out.print("Type 'help' for a list of commands.\n");
 					do {
 						command = sc.nextLine();
 						inventory = game.bathRoom(command, player1.getInventory(), player1);
 						player1.setInventory(inventory);
-					} while (game.getRoomNumber() == 6);
+					} while (game.getRoomNumber() == 5);
 				}
 
-				if (game.getRoomNumber() == 7) {
-					System.out.println(game.getRoomDescription(player1.getInventory()));
+				if (game.getRoomNumber() == 6) {
+					System.out.println(game.getRoomDescription(player1.getInventory(), enemy2));
 					System.out.print("Type 'help' for a list of commands.\n");
 					do {
 						command = sc.nextLine();
 						inventory = game.outsideRoom(command, player1.getInventory(), player1, enemy2);
 						player1.setInventory(inventory);
-					} while (game.getRoomNumber() == 7);
+					} while (game.getRoomNumber() == 6);
 				}
 
-			} while (inventory != null);
+			} while (game.getRoomNumber() != 0);
 
 			System.out.print("Game Over. Type Y to play again.");
 			command = sc.nextLine();

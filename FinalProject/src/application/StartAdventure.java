@@ -25,10 +25,9 @@ public class StartAdventure {
 	private final int LOBBY = 1;
 	private final int BAR = 2;
 	private final int KITCHEN = 3;
-	private final int HALLWAY = 4;
-	private final int BEDROOM = 5;
-	private final int BATHROOM = 6;
-	private final int OUTSIDE = 7;
+	private final int BEDROOM = 4;
+	private final int BATHROOM = 5;
+	private final int OUTSIDE = 6;
 
 	private int roomNum;
 
@@ -48,7 +47,7 @@ public class StartAdventure {
 		return this.roomNum;
 	}
 
-	public String getRoomDescription(boolean[] inventory) {
+	public String getRoomDescription(boolean[] inventory, Enemy enemy) {
 		// for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4
 		// = keyHall
 
@@ -94,6 +93,14 @@ public class StartAdventure {
 						+ "\nvomit while in here."
 						+ "\nThe corpse of the monster you thought you killed has mysteriously disappeared,"
 						+ "\nand you already collected the key you wanted.";
+			} else if (enemy.getDeath() == true) {
+
+				description = "You are back in the kitchen..."
+						+ "\nThe stench of putrid raw meat fills your nostrils and you struggle to hold back"
+						+ "\nvomit while in here."
+						+ "\nThe corpse of the monster you thought you killed has mysteriously disappeared,"
+						+ "\nand you can see a glittering key behind where the corpse lay.";
+
 			} else {
 				description = "You are in the kitchen..."
 						+ "\nThe stench of putrid raw meat fills your nostrils and you struggle to hold back"
@@ -102,31 +109,27 @@ public class StartAdventure {
 						+ "\nchunk of meat in its paws." + "\nBehind it, you can see a glittering key.";
 			}
 
-		} else if (this.roomNum == HALLWAY) {
-
-			description = "You are in the hallway. There is a puzzle on the door to the master bedroom."
-					+ "\nIt seems that a new puzzle appears every time you come back to this room."
-					+ "\nThe puzzle must be solved for you to get into the bedroom.";
-
 		} else if (this.roomNum == BEDROOM) {
-			description = "You are in the master bedroom. There is a puzzle on the door to the bathroom."
+			description = "You are in the master bedroom... " + "\nThere is a puzzle on the door to the bathroom."
 					+ "\nIt seems that a new puzzle appears every time you come back to this room."
 					+ "\nThe puzzle must be solved for you to get into the bathroom.";
 
 		} else if (this.roomNum == BATHROOM) {
 
 			if (inventory[2] == true) {
-				description = "You are in the bathroom. The window to the outside is in front of you."
-						+ "\nYou already picked up the pipe here.";
+				description = "You are in the bathroom..." + "\nThe window to the outside is in front of you,"
+						+ "\nand it looks like it could be opened easily." + "\nYou already picked up the pipe here."
+						+ "\nWhat do you want to do?";
 			} else {
-				description = "You are in the bathroom. The window to the outside is in front of you."
-						+ "\nThere is a leaky faucet pipe under the sink to your right.";
+				description = "You are in the bathroom." + "\nThe window to the outside is in front of you."
+						+ "\nand it looks like it could be opened easily."
+						+ "\nThere is a leaky faucet pipe under the sink to your right." + "\nWhat do you want to do?";
 			}
 
-		} else if (this.roomNum == OUTSIDE) {
+		} else if (this.roomNum == OUTSIDE && enemy.getDeath() == false) {
 			description = "You jumped out the bathroom window, fear numbing the pain of the fall."
 					+ "\nYou are outside the mansion at last, but there's a shadowy figure blocking you from moving forward"
-					+ "\nto the car you can see in the distance.";
+					+ "\nto the car you can see in the distance." + "\nWhat would you like to do?";
 		}
 
 		return description;
@@ -152,7 +155,9 @@ public class StartAdventure {
 		else if (command.equalsIgnoreCase("go west")) {
 			if (newInv[0] == true) {
 				if (newInv[4] == true) {
-					System.out.println("You successfully unlocked the door to the hallway! You proceed west.");
+					System.out.println("You successfully unlocked the door to the hallway! You proceed west."
+							+ "\nThe long dark passageway scares you into grabbing the nearest unlocked door to your right"
+							+ "\nwhich leads to the master bedroom.");
 					this.roomNum = 4;
 
 				} else
@@ -327,16 +332,16 @@ public class StartAdventure {
 			if (enemy.getLives() != 0 && newInv[1] == false) {
 				System.out.println(
 						"You foolishly approach the beast without a weapon!" + "\nIt tries to maul you to death.");
-				boolean death = player.damage(enemy.attack());
-				if (death == true) {
-					System.out.println("You were killed! GAME OVER");
-					return null;
+				int pDamage = player.damage(enemy.attack());
+				if (player.getDeath() == true) {
+					System.out.println("You were killed! "
+							+ "\nBAD END");
+					this.roomNum = 0;
 				} else {
-					System.out.println("There was a slim chance you would survive, but you did!");
-					boolean enemyDeath = enemy.damage(player.attack());
-					if (enemyDeath == true) {
-						System.out.println("The enemy was slain!");
-					}
+					System.out.println("There was a slim chance you would survive, but you did!" + "You received +"
+							+ pDamage + " damage!");
+					enemy.setDeath(true);
+					System.out.println("The enemy was slain!");
 				}
 			} else if (enemy.getLives() != 0 && newInv[1] == true) {
 				System.out.println("The ferocious monster is blocking your path.");
@@ -365,11 +370,11 @@ public class StartAdventure {
 
 			// ****************************** KITCHEN ROOM'S KEY PICKUP FUNCTIONALITY WILL
 			// NOT WORK IF ENEMY FUNCTIONALITY IS NOT IMPLEMENTED
-		} else if (command.equalsIgnoreCase("take") && newInv[4] == false && enemy.getLives() == 0) {
+		} else if (command.equalsIgnoreCase("take") && newInv[4] == false && enemy.getDeath() == true) {
 			System.out.println("You step around your defeated enemy and pick up the key.");
 			newInv[4] = true;
 
-		} else if (command.equalsIgnoreCase("take") && newInv[4] == false && enemy.getLives() != 0)
+		} else if (command.equalsIgnoreCase("take") && newInv[4] == false && enemy.getDeath() == false)
 			System.out.println("You see a key on the floor behind your enemy. " + "\nThe enemy will not let you pass!");
 
 		else if (command.equalsIgnoreCase("take") && newInv[4] == true)
@@ -378,100 +383,13 @@ public class StartAdventure {
 		else if (command.equalsIgnoreCase("attack")) {
 
 			if (newInv[1] == true) {
-				System.out.println("You attack the enemy with the bottle, and it shatters!");
+				System.out.println(
+						"You attack the enemy with the bottle, and it shatters!" + "\nThe beast has been slain!");
+				enemy.setDeath(true);
 				newInv[1] = false;
-				if (enemy.damage(player.attack()) == true) {
-					System.out.println("The beast has been slain!");
-				}
 			} else {
 				System.out.println("Attack with what?");
 			}
-
-		} else if (command.equalsIgnoreCase("heal")) {
-
-			if (player.getHealth() == 3) {
-				System.out.print("Your health is already full.");
-			} else if (newInv[1] == true) {
-				System.out.println("You rip off a piece of cloth from your shirt and apply alcohol on it. "
-						+ "\nYou then wrap the cloth around your wound. " + "\nYou heal yourself by 1 point!");
-				player.heal();
-				newInv[1] = false; // *************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO
-									// LONGER BE USED
-			} else {
-				System.out.println("You have nothing to heal yourself with!");
-			}
-
-		} else if (command.equalsIgnoreCase("help")) {
-			System.out.println("List of Commands:" + "\ngo north" + "\ngo east" + "\ngo west" + "\ngo south" + "\ntake"
-					+ "\ndrink" + "\nheal" + "\nattack" + "\nview inventory" + "\nview health" + "\nhelp");
-
-		} else if (command.equalsIgnoreCase("view inventory")) {
-
-			System.out.println("List of Items in Inventory:");
-			if (newInv[0] == true) {
-				System.out.println("Flashlight");
-			}
-			if (newInv[1] == true) {
-				System.out.println("Bottle");
-			}
-			if (newInv[2] == true) {
-				System.out.println("Faucet Pipe");
-			}
-			if (newInv[3] == true) {
-				System.out.println("Car Keys");
-			}
-			if (newInv[4] == true) {
-				System.out.println("Hallway Keys");
-			}
-		} else if (command.equalsIgnoreCase("view health")) {
-			System.out.println(player);
-
-		} else
-			System.out.println("Please enter only commands from the command list.");
-
-		return newInv;
-	}
-
-	public boolean[] hallwayRoom(String command, boolean[] inventory, Player player) {
-		// for inventory positions, 0 = flashlight, 1 = bottle, 2 = pipe, 3 = keyCar, 4
-		// = keyHall
-		boolean[] newInv = inventory;
-
-		command = command.trim();
-
-		if (command.equalsIgnoreCase("go north"))
-			System.out.println("There's nothing in that direction.");
-
-		else if (command.equalsIgnoreCase("go east")) {
-			System.out.println("You walk east back into the lobby.");
-			this.roomNum = 1;
-
-		} else if (command.equalsIgnoreCase("go south"))
-			System.out.println("There's nothing in that direction.");
-
-		else if (command.equalsIgnoreCase("go west")) {
-			System.out.println("You go west into the master bedroom.");
-			this.roomNum = 5;
-
-		} else if (command.equalsIgnoreCase("take"))
-			System.out.println("There is nothing to take.");
-
-		else if (command.equalsIgnoreCase("drink")) {
-
-			if (newInv[1] == true) {
-				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
-						+ "\nYou lost 1 health!");
-				player.damage(1);
-				newInv[1] = false; // *************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO
-									// LONGER BE USED
-
-			} else {
-				System.out.println("Calm down, party animal. You don't have anything to drink.");
-
-			}
-		} else if (command.equalsIgnoreCase("attack")) {
-
-			System.out.println("Attack what?");
 
 		} else if (command.equalsIgnoreCase("heal")) {
 
@@ -527,11 +445,11 @@ public class StartAdventure {
 
 		if (command.equalsIgnoreCase("go north")) {
 			System.out.println("You walk north into the bathroom.");
-			this.roomNum = 6;
+			this.roomNum = 5;
 
 		} else if (command.equalsIgnoreCase("go east")) {
-			System.out.println("You walk back into the hallway.");
-			this.roomNum = 4;
+			System.out.println("You walk back into the hallway and to the lobby because it gives you the creeps.");
+			this.roomNum = 1;
 
 		} else if (command.equalsIgnoreCase("go south")) {
 			System.out.println("There's nothing in that direction.");
@@ -611,10 +529,13 @@ public class StartAdventure {
 		if (command.equalsIgnoreCase("go north")) {
 
 			if (newInv[2] == false) {
-				System.out.println("There's a glass window there, but it's not budging.");
+				System.out.println("You raise the window and climb outside.");
+				this.roomNum = 6;
 			} else {
-				System.out.println("You smash the window open and climb out of the mansion.");
-				this.roomNum = 7;
+				System.out.println("You smash the window open, thinking it would be cool like in the movies, "
+						+ "but you get a few cuts on your hand. It's not a big deal, though"
+						+ "\nand climb out of the mansion.");
+				this.roomNum = 6;
 			}
 
 		} else if (command.equalsIgnoreCase("go east")) {
@@ -622,7 +543,7 @@ public class StartAdventure {
 
 		} else if (command.equalsIgnoreCase("go south")) {
 			System.out.println("You walk back into the master bedroom.");
-			this.roomNum = 5;
+			this.roomNum = 4;
 
 		} else if (command.equalsIgnoreCase("go west"))
 			System.out.println("There is nowhere for you to go.");
@@ -702,24 +623,30 @@ public class StartAdventure {
 
 		command = command.trim();
 
-		if (command.equalsIgnoreCase("go north"))
+		if (command.equalsIgnoreCase("go north")) {
 
-			if (newInv[2] == false && enemy.getLives() != 0) {
+			if (newInv[2] == false && enemy.getDeath() == false) {
 				System.out.println("Without any weapon, you foolishly charge at the shadow.");
-				boolean death = player.damage(enemy.attack());
-				if (death == true) {
-					System.out.println("You died!");
-					return null;
+				int pDamage = player.damage(enemy.attack());
+				if (player.getDeath() == true) {
+					System.out.println("You were killed!"
+							+ "\nBAD END");
+					this.roomNum = 0;
 				} else {
-					System.out.println("There was a slim chance you would survive, but you did!");
-					boolean enemyDeath = enemy.damage(player.attack());
-					if (enemyDeath == true) {
+					System.out.println("There was a slim chance you would survive, but you did!" + "\nYou received +"
+							+ pDamage + " damage!");
+					int eDamage = enemy.damage(player.attack());
+					if (enemy.getDeath() == true) {
 						System.out.println("The enemy was slain!");
+					} else {
+						System.out.println("This enemy is tougher. It received only +" + eDamage + " damage!");
+						System.out.println(enemy);
 					}
 				}
-			} else if (newInv[2] == true && enemy.getLives() != 0) {
+			} else if (newInv[2] == true && enemy.getDeath() == false) {
 				System.out.println("The shadow is blocking your path to your car.");
-			} else {
+
+			} else if (enemy.getDeath() == true) {
 				System.out.println(
 						"The shadow disappears into thin air and you are left standing in front of" + "\na white car.");
 
@@ -728,24 +655,24 @@ public class StartAdventure {
 							"Thankfully you got the keys while you were still inside the mansion and were able to"
 									+ "\nturn on the ignition and drive away somewhere far from that mansion."
 									+ "\nGOOD END");
-					return null;
+					this.roomNum = 0;
 				} else {
 					System.out.println("Although you are finally outside the mansion, you are in the middle of nowhere,"
 							+ "\nand you have no keys to drive the car!" + "\nBAD END");
-					return null;
+					this.roomNum = 0;
 				}
 			}
 
-		else if (command.equalsIgnoreCase("go east"))
+		} else if (command.equalsIgnoreCase("go east")) {
 			System.out.println("There is a fence you cannot climb.");
 
-		else if (command.equalsIgnoreCase("go south"))
+		} else if (command.equalsIgnoreCase("go south")) {
 			System.out.println("Jagged glass prevents you from climbing back into the window.");
 
-		else if (command.equalsIgnoreCase("go west"))
+		} else if (command.equalsIgnoreCase("go west")) {
 			System.out.println("There is a fence you cannot climb.");
 
-		else if (command.equalsIgnoreCase("drink")) {
+		} else if (command.equalsIgnoreCase("drink")) {
 
 			if (newInv[1] == true) {
 				System.out.println("You drink all of the liquor in the bottle and find yourself inebriated. "
@@ -754,15 +681,29 @@ public class StartAdventure {
 				newInv[1] = false; // *************THE BOTTLE IS REMOVED FROM THE PLAYER'S INVENTORY AND CAN NO
 									// LONGER BE USED
 
-			} else
+			} else {
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
+			}
 
 		} else if (command.equalsIgnoreCase("attack")) {
 
 			if (newInv[2] == true) {
 				System.out.println("You run at the shadowy figure and strike it with the metal pipe!");
-				if (enemy.damage(player.attack()) == true) {
+				int eDamage = enemy.damage(player.attack());
+				if (enemy.getDeath() == true) {
 					System.out.println("You successfully defeated the shadow!");
+				} else {
+					System.out.println("This enemy is tougher. It received only +" + eDamage + " damage!");
+					System.out.println(enemy);
+					System.out.println("It strikes you back!");
+					int pDamage = player.damage(enemy.attack());
+					if (player.getDeath() == true) {
+						System.out.println("You were killed!"
+								+ "\nBAD END");
+						this.roomNum = 0;
+					} else {
+						System.out.println("You were knocked back and received +" + pDamage + " damage!");
+					}
 				}
 
 			} else {
@@ -808,8 +749,9 @@ public class StartAdventure {
 		} else if (command.equalsIgnoreCase("view health")) {
 			System.out.println(player);
 
-		} else
+		} else {
 			System.out.println("Please enter only commands from the command list.");
+		}
 
 		return newInv;
 	}

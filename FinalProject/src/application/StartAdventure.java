@@ -164,12 +164,12 @@ exceptions)
 		else if(command.equalsIgnoreCase("take") && newInv[0] == false)			
 			System.out.println("You feel around for the key but cannot find it in the dark.");
 			
-		else if(command.equalsIgnoreCase("take") && newInv[0] == true && newInv[4])
+		else if(command.equalsIgnoreCase("take") && newInv[0] == true && newInv[3])
 			System.out.println("There is nothing to take.");
 		
-		else if(command.equalsIgnoreCase("take") && newInv[0] == true && newInv[4] == false) {
+		else if(command.equalsIgnoreCase("take") && newInv[0] == true && newInv[3] == false) {
 			System.out.println("You take the key.");
-			newInv[4] = true;	
+			newInv[3] = true;	
 					
 		} else if(command.equalsIgnoreCase("drink")) {
 				
@@ -193,8 +193,22 @@ exceptions)
 						+ "\ndrink"
 						+ "\nheal"
 						+ "\nattack"
+						+ "\nview inventory"
+						+ "\nview health"
 						+ "\nhelp");
 				
+		} else if(command.equalsIgnoreCase("view inventory")){
+			
+			System.out.println("List of Items in Inventory:");
+					if(newInv[0] == true) {System.out.println("Flashlight");}
+					if(newInv[1] == true) {System.out.println("Bottle");}
+					if(newInv[2] == true) {System.out.println("Faucet Pipe");}
+					if(newInv[3] == true) {System.out.println("Car Keys");}
+					if(newInv[4] == true) {System.out.println("Hallway Keys");}
+		} else if(command.equalsIgnoreCase("view health")){
+			
+			System.out.println("Player Health:");
+					//player health once implemented
 		} else
 			System.out.println("Please enter only commands from the command list.");
 		
@@ -269,8 +283,23 @@ exceptions)
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
+					+ "\nview inventory"
+					+ "\nview health"
 					+ "\nhelp");
-		} else
+			
+	} else if(command.equalsIgnoreCase("view inventory")){
+		
+		System.out.println("List of Items in Inventory:");
+				if(newInv[0] == true) {System.out.println("Flashlight");}
+				if(newInv[1] == true) {System.out.println("Bottle");}
+				if(newInv[2] == true) {System.out.println("Faucet Pipe");}
+				if(newInv[3] == true) {System.out.println("Car Keys");}
+				if(newInv[4] == true) {System.out.println("Hallway Keys");}
+	} else if(command.equalsIgnoreCase("view health")){
+		
+		System.out.println("Player Health:");
+				//player health once implemented
+	} else
 			System.out.println("Please enter only commands from the command list.");	
 		
 		return newInv;
@@ -307,14 +336,14 @@ exceptions)
 				System.out.println("Calm down, party animal. You don't have anything to drink.");
 		
 		// ****************************** KITCHEN ROOM'S KEY PICKUP FUNCTIONALITY WILL NOT WORK IF ENEMY FUNCTIONALITY IS NOT IMPLEMENTED
-		} else if(command.equalsIgnoreCase("take") && newInv[3] == false /** && enemy is defeated */) {
+		} else if(command.equalsIgnoreCase("take") && newInv[4] == false /** && enemy is defeated */) {
 			System.out.println("You step around your defeated enemy and pick up another key.");
-			newInv[3] = true;
+			newInv[4] = true;
 			
-		} else if(command.equalsIgnoreCase("take") && newInv[3] == false /** && enemy is alive */)
+		} else if(command.equalsIgnoreCase("take") && newInv[4] == false /** && enemy is alive */)
 			System.out.println("You see another key on the floor behind your enemy. " + "\nThe enemy will not let you pass!");
 		
-		else if(command.equalsIgnoreCase("take") && newInv[3] == true)
+		else if(command.equalsIgnoreCase("take") && newInv[4] == true)
 			System.out.println("There is nothing to take.");
 		
 		else if(command.equalsIgnoreCase("attack")) {
@@ -341,8 +370,23 @@ exceptions)
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
+					+ "\nview inventory"
+					+ "\nview health"
 					+ "\nhelp");
-		} else
+			
+	} else if(command.equalsIgnoreCase("view inventory")){
+		
+		System.out.println("List of Items in Inventory:");
+				if(newInv[0] == true) {System.out.println("Flashlight");}
+				if(newInv[1] == true) {System.out.println("Bottle");}
+				if(newInv[2] == true) {System.out.println("Faucet Pipe");}
+				if(newInv[3] == true) {System.out.println("Car Keys");}
+				if(newInv[4] == true) {System.out.println("Hallway Keys");}
+	} else if(command.equalsIgnoreCase("view health")){
+		
+		System.out.println("Player Health:");
+				//player health once implemented
+	} else
 			System.out.println("Please enter only commands from the command list.");
 		
 		return newInv;
@@ -407,8 +451,23 @@ exceptions)
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
+					+ "\nview inventory"
+					+ "\nview health"
 					+ "\nhelp");
-		}  else
+			
+	} else if(command.equalsIgnoreCase("view inventory")){
+		
+		System.out.println("List of Items in Inventory:");
+				if(newInv[0] == true) {System.out.println("Flashlight");}
+				if(newInv[1] == true) {System.out.println("Bottle");}
+				if(newInv[2] == true) {System.out.println("Faucet Pipe");}
+				if(newInv[3] == true) {System.out.println("Car Keys");}
+				if(newInv[4] == true) {System.out.println("Hallway Keys");}
+	} else if(command.equalsIgnoreCase("view health")){
+		
+		System.out.println("Player Health:");
+				//player health once implemented
+	} else
 			System.out.println("Please enter only commands from the command list.");
 		
 		return newInv;
@@ -470,8 +529,23 @@ exceptions)
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
+					+ "\nview inventory"
+					+ "\nview health"
 					+ "\nhelp");
-		} else
+			
+	} else if(command.equalsIgnoreCase("view inventory")){
+		
+		System.out.println("List of Items in Inventory:");
+				if(newInv[0] == true) {System.out.println("Flashlight");}
+				if(newInv[1] == true) {System.out.println("Bottle");}
+				if(newInv[2] == true) {System.out.println("Faucet Pipe");}
+				if(newInv[3] == true) {System.out.println("Car Keys");}
+				if(newInv[4] == true) {System.out.println("Hallway Keys");}
+	} else if(command.equalsIgnoreCase("view health")){
+		
+		System.out.println("Player Health:");
+				//player health once implemented
+	} else
 			System.out.println("Please enter only commands from the command list.");
 				
 		return newInv;
@@ -539,8 +613,23 @@ exceptions)
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
+					+ "\nview inventory"
+					+ "\nview health"
 					+ "\nhelp");
-		} else
+			
+	} else if(command.equalsIgnoreCase("view inventory")){
+		
+		System.out.println("List of Items in Inventory:");
+				if(newInv[0] == true) {System.out.println("Flashlight");}
+				if(newInv[1] == true) {System.out.println("Bottle");}
+				if(newInv[2] == true) {System.out.println("Faucet Pipe");}
+				if(newInv[3] == true) {System.out.println("Car Keys");}
+				if(newInv[4] == true) {System.out.println("Hallway Keys");}
+	} else if(command.equalsIgnoreCase("view health")){
+		
+		System.out.println("Player Health:");
+				//player health once implemented
+	} else
 			System.out.println("Please enter only commands from the command list.");		
 		
 		return newInv;
@@ -599,8 +688,23 @@ exceptions)
 					+ "\ndrink"
 					+ "\nheal"
 					+ "\nattack"
+					+ "\nview inventory"
+					+ "\nview health"
 					+ "\nhelp");
-		}  else
+			
+	} else if(command.equalsIgnoreCase("view inventory")){
+		
+		System.out.println("List of Items in Inventory:");
+				if(newInv[0] == true) {System.out.println("Flashlight");}
+				if(newInv[1] == true) {System.out.println("Bottle");}
+				if(newInv[2] == true) {System.out.println("Faucet Pipe");}
+				if(newInv[3] == true) {System.out.println("Car Keys");}
+				if(newInv[4] == true) {System.out.println("Hallway Keys");}
+	} else if(command.equalsIgnoreCase("view health")){
+		
+		System.out.println("Player Health:");
+				//player health once implemented
+	}  else
 			System.out.println("Please enter only commands from the command list.");
 		
 		return newInv;

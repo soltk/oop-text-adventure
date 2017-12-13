@@ -1,0 +1,42 @@
+--- HAUNTED MANSION PROJECT ---
+
+Written by:
+
+ * Liz Berberena
+ * Jack Davitt
+ * Shazia Mansuri
+ * Simran Nanwani
+ * Huda Yousef
+ 
+A. GAME DESCRIPTION
+ 
+	The objective of the game is to escape from a haunted mansion.  
+	The player will need to find and use items, navigate the mansion, and encounter and fight enemies.  
+	The game ends when the player is either defeated or successfully escapes.
+ 	
+B. HOW TO PLAY
+
+	Enter Y to begin a game, and enter the player name(s).
+	Once the game begins, type 'help' for a list of commands.  Using 'go' *must* be followed by a direction
+	(north, south, east, west).  'Take' does not need the item listed after.
+	
+C. CHEAT SHEET
+
+	How to win:
+	1. Go east
+	2. Take the flashlight and bottle
+	3. Go east
+	4. Use the bottle to defeat the enemy
+	5. Take key
+	6. Go west
+	7. Go west
+	8. Take key
+	9. Go west
+	10. Go west
+	11. Go north
+	12. Take the pipe
+	13. Use the pipe to break the window
+	14. Go north
+	15. Use the pipe or bottle to defeat the enemy
+	16. Go north
+	

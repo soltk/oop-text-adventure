@@ -112,7 +112,7 @@ public class StartAdventure {
 		} else if (this.roomNum == BEDROOM) {
 			description = "You are in the master bedroom... " + "\nThere is a question on the door to the bathroom."
 					+ "\nThe question must be answered correctly for you to get into the bathroom."
-					+ "\nThe question on the door reads 'What color is a ghost? Be alert. (this totally isn't foreshadowing btw)'" 
+					+ "\nThe question on the door reads 'What color is a ghost? Be alert. (this totally isn't foreshadowing btw)'"
 					+ "\nW-what? What an unsettling statement. At least, it's an easy question.";
 
 		} else if (this.roomNum == BATHROOM) {
@@ -331,8 +331,7 @@ public class StartAdventure {
 		else if (command.equalsIgnoreCase("go east"))
 
 			if (enemy.getLives() != 0 && newInv[1] == false) {
-				System.out.println(
-						"You foolishly approach the beast without a weapon!" + "\nIt tries to maul you to death.");
+				System.out.println("You foolishly approach the beast without a weapon!" + "\nIt tries to maul you to death.");
 				int pDamage = player.damage(enemy.attack());
 				if (player.getDeath() == true) {
 					System.out.println("You were killed! " + "\nBAD END");
@@ -444,8 +443,7 @@ public class StartAdventure {
 		command = command.trim();
 
 		if (command.equalsIgnoreCase("go north")) {
-			System.out
-					.println("You must answer the question first to enter the bathroom." + "\nWhat color is a ghost?");
+			System.out.println("You must answer the question first to enter the bathroom." + "\nWhat color is a ghost?");
 
 		} else if (command.equalsIgnoreCase("go east")) {
 			System.out.println("You walk back into the hallway and to the lobby because it gives you the creeps.");

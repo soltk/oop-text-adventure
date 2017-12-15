@@ -68,3 +68,6 @@ D. SECRET COMMAND
 	In the last room, there is a secret command that automatically defeats the last enemy if 
 	you don't want to deal with fighting it. This command is 'skip'.
 
+E. SOURCE CODE
+	
+	The source code for this project can be found at https://github.com/soltk/oop-text-adventure

@@ -3,7 +3,7 @@
 
 Written by:
 
- * Liz (lorisdown)
+ * Liz Berberena
  * Jack Davitt
  * Shazia Mansuri
  * Simran Nanwani

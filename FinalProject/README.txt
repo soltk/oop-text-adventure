@@ -3,7 +3,7 @@
 
 Written by:
 
- * Liz Berberena
+ * Liz
  * Jack Davitt
  * Shazia Mansuri
  * Simran Nanwani
@@ -29,7 +29,7 @@ A. GAME DESCRIPTION
  	At the conclusion of the game, the user must defeat the final enemy to make it to 
  	their car, which can only be accessed if the player had picked up their car keys in 
  	one of the previous rooms. There are different endings depending on player actions, 
- 	so it is essentially a short and simple ìChoose your own adventureî game. The game 
+ 	so it is essentially a short and simple ‚ÄúChoose your own adventure‚Äù game. The game 
 	serves as a mix between storytelling and problem solving although it lacks an actual 
 	UI or graphics in the text adventure spirit, so it would be more entertaining to 
 	players who are fans of the genre or are highly imaginative and love reading and logic

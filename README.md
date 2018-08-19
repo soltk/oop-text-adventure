@@ -3,7 +3,7 @@
 
 Written by:
 
- * Liz
+ * @ByLiz on Github
  * Jack Davitt
  * Shazia Mansuri
  * Simran Nanwani

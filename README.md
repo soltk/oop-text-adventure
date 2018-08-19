@@ -3,7 +3,7 @@
 
 Written by:
 
- * Liz B.
+ * Liz
  * Jack Davitt
  * Shazia Mansuri
  * Simran Nanwani

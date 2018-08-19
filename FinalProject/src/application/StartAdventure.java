@@ -1,7 +1,7 @@
 /*
  * Written by:
  * 
- * Liz Berberena
+ * @ByLiz
  * Jack Davitt
  * Shazia Mansuri
  * Simran Nanwani

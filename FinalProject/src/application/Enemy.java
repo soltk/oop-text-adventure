@@ -1,7 +1,7 @@
 /*
  * Written by:
  * 
- * @ByLiz on Github
+ * Liz Berberena
  * Jack Davitt
  * Shazia Mansuri
  * Simran Nanwani

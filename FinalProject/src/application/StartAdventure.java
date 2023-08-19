@@ -1,7 +1,7 @@
 /*
  * Written by:
  * 
- * Iris of Lys
+ * Liz Berberena
  * Jack Davitt
  * Shazia Mansuri
  * Simran Nanwani
